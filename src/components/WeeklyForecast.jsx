@@ -1,12 +1,14 @@
 import React from "react";
-import SearchButton from "./SearchButton";
+import Carousel from "./carousel";
+import WeeklyForecastContent from "./WeeklyForecastContent";
 
-const WeeklyForecast = ({ handleSearch }) => {
-  return (
-    <div>
-      <SearchButton handleSearch={handleSearch} />
-    </div>
-  );
-};
+const WeeklyForecast = ({ todayWeather, weeklyWeather }) => (
+  <>
+    <Carousel data={todayWeather} />
+    {weeklyWeather.map((day) => (
+      <WeeklyForecastContent data={day} key={day[0].dt} />
+    ))}
+  </>
+);
 
 export default WeeklyForecast;

@@ -2,7 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import SearchParams from "./components/SearchParams";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useState, useEffect } from "react";
 
 const App = () => {
@@ -30,7 +30,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <SearchParams coord={locationCoord} />
-      <ReactQueryDevtools initialIsOpen={true} />
+      {/* <ReactQueryDevtools initialIsOpen={true} /> */}
     </QueryClientProvider>
   );
 };

@@ -1,13 +1,23 @@
 import WeeklyForecast from "./WeeklyForecast";
 import WeatherTab from "./WeatherTab";
-import Charts from "./Charts";
-import Map from "./Map";
+import Navbar from "./Navbar";
+import OtherCities from "./OtherCities";
 import { useState, useEffect } from "react";
 import iconObj from "../constants/iconObj";
 
-const Mobile = ({ list = [], city, handleSearch }) => {
+const Mobile = ({ list = [], city, handleSearch, otherCityData }) => {
   const [today, setToday] = useState([]);
   const [otherDays, setOtherDays] = useState([]);
+  const [mode, setMode] = useState({
+    home: true,
+    search: false,
+    forecast: false,
+    darkMode: true,
+  });
+
+  const TODO = (value) => {
+    setMode(value);
+  };
 
   useEffect(() => {
     setDays(convertData());
@@ -67,16 +77,38 @@ const Mobile = ({ list = [], city, handleSearch }) => {
     setOtherDays(otherDaysArr);
   }
 
+  if (mode.home) {
+    return (
+      <>
+        <WeatherTab
+          todayWeather={today}
+          city={[city?.country, city?.name]}
+          icon={iconObj[list[0]?.weather[0]?.icon]}
+        />
+        <Navbar TODO_={TODO} />
+      </>
+    );
+  } else if (mode.search) {
+    return (
+      <>
+        <OtherCities data={otherCityData} handleSearch={handleSearch} />
+        <Navbar TODO_={TODO} />
+      </>
+    );
+  } else if (mode.forecast) {
+    return (
+      <>
+        <WeeklyForecast todayWeather={today} weeklyWeather={otherDays} />
+        <Navbar TODO_={TODO} />
+      </>
+    );
+  }
+
   return (
     <>
-      <WeatherTab
-        todayWeather={today}
-        city={[city?.country, city?.name]}
-        icon={iconObj[list[0]?.weather[0]?.icon]}
-      />
-      <Charts />
-      <WeeklyForecast handleSearch={handleSearch} weeklyWeather={otherDays} />
-      <Map />
+      {/* 
+     
+     */}
     </>
   );
 };

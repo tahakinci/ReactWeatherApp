@@ -1,5 +1,5 @@
-import iconObj from "../constants/iconObj";
-import TodayForecast from "./TodayForecast";
+import Carousel from "./carousel";
+import Charts from "./Charts";
 
 const WeatherTab = ({ city, todayWeather, icon = [] }) => (
   <div>
@@ -24,14 +24,9 @@ const WeatherTab = ({ city, todayWeather, icon = [] }) => (
         </div>
       </div>
     </div>
+    <Charts weather={todayWeather} />
     <div>
-      {todayWeather.map((day) => (
-        <TodayForecast
-          data={day}
-          icon={iconObj[day.weather[0].icon]}
-          key={day.dt}
-        />
-      ))}
+      <Carousel data={todayWeather} />
     </div>
   </div>
 );

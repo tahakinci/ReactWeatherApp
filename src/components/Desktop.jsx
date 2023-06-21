@@ -6,6 +6,7 @@ import Map from "./Map";
 const Desktop = () => {
   return (
     <>
+      HELLO !!!
       <WeatherTab />
       <Charts />
       <WeeklyForecast />
