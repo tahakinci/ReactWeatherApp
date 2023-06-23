@@ -1,8 +1,10 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import SearchParams from "./components/SearchParams";
+import Details from "./components/Details";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const App = () => {
@@ -28,10 +30,16 @@ const App = () => {
     console.log(error);
   };
   return (
-    <QueryClientProvider client={queryClient}>
-      <SearchParams coord={locationCoord} />
-      {/* <ReactQueryDevtools initialIsOpen={true} /> */}
-    </QueryClientProvider>
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <Routes>
+          <Route path="details/:id" element={<Details />} />
+          <Route path="/" element={<SearchParams coord={locationCoord} />} />
+        </Routes>
+
+        {/* <ReactQueryDevtools initialIsOpen={true} /> */}
+      </QueryClientProvider>
+    </BrowserRouter>
   );
 };
 
