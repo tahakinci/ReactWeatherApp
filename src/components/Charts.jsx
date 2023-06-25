@@ -4,7 +4,7 @@ const Charts = ({ weather }) => {
   return (
     <div>
       {weather.map((hour) => (
-        <div>
+        <div key={hour.dt}>
           <div
             style={{ height: (hour.rain ? hour.rain["3h"] * 100 : 0) + "%" }}
           >

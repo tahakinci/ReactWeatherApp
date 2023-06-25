@@ -1,4 +1,4 @@
-import iconObj from "../constants/iconObj";
+import iconObj from "../../constants/iconObj";
 
 const WeeklyForecastContent = ({ data }) => {
   const date = `${new Date(data[4].dt * 1000)}`;
@@ -8,7 +8,7 @@ const WeeklyForecastContent = ({ data }) => {
         <p>{date.substring(0, 4)}</p>
         <p>{date.substring(4, 10)}</p>
       </div>
-      <div>{data[0].main.temp}</div>
+      <div>{Math.round(data[0].main.temp)}°C</div>
       <div>
         <img
           src={iconObj[data[0].weather[0].icon][0]}

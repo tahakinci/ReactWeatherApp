@@ -1,14 +1,14 @@
 import React from "react";
-import SearchButton from "./SearchButton";
-import iconObj from "../constants/iconObj";
-import Map from "./Map";
+import SearchButton from "../SearchButton";
+import iconObj from "../../constants/iconObj";
+import Map from "../Map";
 
 const OtherCities = ({ data, handleSearch }) => (
   <>
     <SearchButton handleSearch={handleSearch} />
     {data.map((city) => (
       <div key={city.name}>
-        <p>{city.main.temp}</p>
+        <p>{Math.round(city.main.temp)}°C</p>
         <p>{city.weather[0].main}</p>
         <img
           src={iconObj[city.weather[0].icon][0]}

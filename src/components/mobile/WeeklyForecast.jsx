@@ -1,5 +1,5 @@
 import React from "react";
-import Carousel from "./carousel";
+import Carousel from "./Carousel";
 import WeeklyForecastContent from "./WeeklyForecastContent";
 
 const WeeklyForecast = ({ todayWeather, weeklyWeather }) => (

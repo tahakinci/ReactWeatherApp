@@ -1,8 +1,8 @@
-import Carousel from "./carousel";
-import Charts from "./Charts";
+import Carousel from "./Carousel";
+import Charts from "../Charts";
 
 const WeatherTab = ({ city, todayWeather, icon = [] }) => (
-  <div>
+  <div className="flex flex-col items-center justify-center">
     <div>
       <p>{city[1]}</p>
       <p>{Date(todayWeather[0]?.dt).substring(4, 15)}</p>
@@ -11,7 +11,7 @@ const WeatherTab = ({ city, todayWeather, icon = [] }) => (
         <div>
           <div>
             <p>Temp</p>
-            <p>{todayWeather[0]?.main?.temp}</p>
+            <p>{Math.round(todayWeather[0]?.main?.temp)}°C</p>
           </div>
           <div>
             <p>Wind</p>

@@ -1,6 +1,6 @@
 import React from "react";
 import CarouselContent from "./CarouselContent";
-import iconObj from "../constants/iconObj";
+import iconObj from "../../constants/iconObj";
 
 const Carousel = ({ data }) => (
   <>
