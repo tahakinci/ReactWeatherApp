@@ -23,18 +23,21 @@ const SearchParams = ({ coord }) => {
   };
 
   const toggleDevice = () => {
-    const element = document.getElementById("deneme");
+    const element = document.getElementById("root");
     if (mode) {
       setMode(false);
-      element.style.width = "500px";
+      element.style.maxWidth = "1520px";
     } else {
-      element.style.width = "1520px";
+      element.style.maxWidth = "425px";
       setMode(true);
     }
   };
 
   return (
-    <div id="deneme">
+    <div
+      id="deneme"
+      className="w-full rounded-[2rem] bg-black font-['Oxanium'] text-white"
+    >
       <button onClick={() => toggleDevice()}>Click me</button>
       {mode ? (
         <Mobile

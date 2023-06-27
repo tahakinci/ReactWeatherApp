@@ -1,6 +1,14 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHouse,
+  faMagnifyingGlass,
+  faChartLine,
+  faSun,
+} from "@fortawesome/free-solid-svg-icons";
+
 const Navbar = ({ TODO_ }) => {
   return (
-    <>
+    <div className="flex w-full items-center justify-around py-5">
       <button
         value={"home"}
         onClick={() =>
@@ -11,7 +19,9 @@ const Navbar = ({ TODO_ }) => {
             darkMode: true,
           })
         }
-      ></button>
+      >
+        <FontAwesomeIcon icon={faHouse} size="xl" />
+      </button>
       <button
         value={"search"}
         onClick={() =>
@@ -22,7 +32,9 @@ const Navbar = ({ TODO_ }) => {
             darkMode: true,
           })
         }
-      ></button>
+      >
+        <FontAwesomeIcon icon={faMagnifyingGlass} size="xl" />
+      </button>
       <button
         value={"forecast"}
         onClick={() =>
@@ -33,7 +45,9 @@ const Navbar = ({ TODO_ }) => {
             darkMode: true,
           })
         }
-      ></button>
+      >
+        <FontAwesomeIcon icon={faChartLine} size="xl" />
+      </button>
       <button
         value={"darkMode"}
         onClick={() =>
@@ -44,8 +58,10 @@ const Navbar = ({ TODO_ }) => {
             darkMode: false,
           })
         }
-      ></button>
-    </>
+      >
+        <FontAwesomeIcon icon={faSun} size="xl" />
+      </button>
+    </div>
   );
 };
 
