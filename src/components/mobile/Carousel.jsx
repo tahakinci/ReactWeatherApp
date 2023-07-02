@@ -15,7 +15,7 @@ const Carousel = ({ data }) => {
     setCurr((curr) => (curr === data.length - 2 ? 0 : curr + 1));
   return (
     <div className="py-2">
-      <h3 className="py-2">Today</h3>
+      <h3 className="py-2 text-xl">Today</h3>
       <div className="relative flex ">
         <div
           className="me-auto mt-2 flex transition-transform duration-500 ease-out"
@@ -33,13 +33,13 @@ const Carousel = ({ data }) => {
         <div className="absolute inset-0 flex items-center justify-between">
           <button
             onClick={prev}
-            className="bg-/80 w-10 rounded-full p-1 shadow"
+            className="w-10 rounded-full bg-white/80 p-1 text-black shadow hover:bg-indigo-700 hover:text-white"
           >
             <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <button
             onClick={next}
-            className="rounded-full bg-white/80 p-1 shadow"
+            className="w-10 rounded-full bg-white/80 p-1 text-black shadow hover:bg-indigo-700 hover:text-white"
           >
             <FontAwesomeIcon icon={faChevronRight} />
           </button>

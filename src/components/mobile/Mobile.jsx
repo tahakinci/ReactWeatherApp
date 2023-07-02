@@ -77,39 +77,22 @@ const Mobile = ({ list = [], city, handleSearch, otherCityData }) => {
     setOtherDays(otherDaysArr);
   }
 
-  if (mode.home) {
-    return (
-      <>
+  return (
+    <div className="flex  h-full flex-col justify-around p-3">
+      {mode.home ? (
         <WeatherTab
           todayWeather={today}
           city={[city?.country, city?.name]}
           icon={iconObj[list[0]?.weather[0]?.icon]}
         />
-        <Navbar TODO_={TODO} />
-      </>
-    );
-  } else if (mode.search) {
-    return (
-      <>
+      ) : mode.search ? (
         <OtherCities data={otherCityData} handleSearch={handleSearch} />
-        <Navbar TODO_={TODO} />
-      </>
-    );
-  } else if (mode.forecast) {
-    return (
-      <>
+      ) : (
         <WeeklyForecast todayWeather={today} weeklyWeather={otherDays} />
-        <Navbar TODO_={TODO} />
-      </>
-    );
-  }
+      )}
 
-  return (
-    <>
-      {/* 
-     
-     */}
-    </>
+      <Navbar TODO_={TODO} />
+    </div>
   );
 };
 

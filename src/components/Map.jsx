@@ -17,7 +17,11 @@ const Map = ({ data }) => {
   `;
   return (
     <>
-      <img src={mapURL} alt="map" />
+      <img
+        src={mapURL}
+        alt="map"
+        className="max-h-[150px] w-full rounded-2xl object-cover"
+      />
     </>
   );
 };

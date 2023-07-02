@@ -8,7 +8,7 @@ import {
 
 const Navbar = ({ TODO_ }) => {
   return (
-    <div className="flex w-full items-center justify-around py-5">
+    <div className="flex w-full items-center justify-around py-4">
       <button
         value={"home"}
         onClick={() =>

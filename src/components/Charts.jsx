@@ -3,7 +3,7 @@ import React from "react";
 const Charts = ({ weather }) => {
   return (
     <div className="py-2">
-      <h3 className="py-2">Rain</h3>
+      <h3 className="py-2 text-xl">Rain</h3>
       <div className="flex h-[100px] w-full items-end ">
         {weather.map((hour) => (
           <div

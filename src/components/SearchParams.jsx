@@ -36,9 +36,11 @@ const SearchParams = ({ coord }) => {
   return (
     <div
       id="deneme"
-      className="w-full rounded-[2rem] bg-black font-['Oxanium'] text-white"
+      className="h-[100vh] w-full  bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-indigo-900 from-5%  to-slate-900 to-20% font-['Oxanium'] text-white"
     >
-      <button onClick={() => toggleDevice()}>Click me</button>
+      <button onClick={() => toggleDevice()} className="absolute">
+        Click me
+      </button>
       {mode ? (
         <Mobile
           {...weatherData}
