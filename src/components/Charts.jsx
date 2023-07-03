@@ -2,8 +2,8 @@ import React from "react";
 
 const Charts = ({ weather }) => {
   return (
-    <div className="py-2">
-      <h3 className="py-2 text-xl">Rain</h3>
+    <div className="w-full py-2 ">
+      <h3 className="py-2 text-lg ">Rain</h3>
       <div className="flex h-[100px] w-full items-end ">
         {weather.map((hour) => (
           <div
@@ -19,7 +19,9 @@ const Charts = ({ weather }) => {
               }}
               className="w-full border-t-2 border-blue-500 bg-blue-200 "
             ></div>
-            <div>{hour.dt_txt.substring(11, 16)}</div>
+            <div className="text-xs min-[380px]:text-base ">
+              {hour.dt_txt.substring(11, 16)}
+            </div>
           </div>
         ))}
       </div>

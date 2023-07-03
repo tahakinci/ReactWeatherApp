@@ -7,7 +7,7 @@ import fetchCities from "../constants/fetchCities";
 const SearchParams = ({ coord }) => {
   const [city, setCity] = useState([]);
   const [mode, setMode] = useState(true);
-  const citiesID = [2988507, 2643743, 3173435, 5391959];
+  const citiesID = [2988507, 2643743, 3173435, 3117735];
 
   //coord contains user coordinate. before user input any city useWeatherDayta fetches users coordinate weather
   //TODO : find a way to make city state's initial value to coord without using useEffect!

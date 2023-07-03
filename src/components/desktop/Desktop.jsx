@@ -68,7 +68,7 @@ const Desktop = ({ list = [], city, handleSearch, otherCityData }) => {
   }
 
   return (
-    <>
+    <div className="grid grid-cols-[3fr_1fr]">
       <Forecast
         today={today}
         otherDays={otherDays}
@@ -77,14 +77,16 @@ const Desktop = ({ list = [], city, handleSearch, otherCityData }) => {
       />
       <Charts weather={today} />
       <Map data={otherCityData} />
-      {otherCityData.map((city) => (
-        <OtherCitiesDesktop
-          data={city}
-          key={city.name}
-          icon={iconObj[city?.weather[0]?.icon]}
-        />
-      ))}
-    </>
+      <div>
+        {otherCityData.map((city) => (
+          <OtherCitiesDesktop
+            data={city}
+            key={city.name}
+            icon={iconObj[city?.weather[0]?.icon]}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 

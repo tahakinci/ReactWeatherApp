@@ -2,7 +2,7 @@ import Carousel from "./Carousel";
 import Charts from "../Charts";
 
 const WeatherTab = ({ city, todayWeather, icon = [] }) => (
-  <div className=" flex w-full grow flex-col justify-around overflow-hidden">
+  <div className=" flex w-full grow flex-col justify-around ">
     <div className="flex flex-col items-center justify-center py-4">
       <h2 className="pb-2 text-2xl font-bold ">{city[1]}</h2>
       <p className="text-s font-normal text-gray-400">
@@ -13,7 +13,7 @@ const WeatherTab = ({ city, todayWeather, icon = [] }) => (
       <img
         src={icon[0]}
         alt={todayWeather[0]?.weather[0]?.description}
-        className="object-contain"
+        className="m-4 w-[100px] object-contain"
       />
       <div className="flex w-full items-center justify-evenly text-center text-xl">
         <div>

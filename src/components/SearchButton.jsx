@@ -20,7 +20,7 @@ const SearchButton = ({ handleSearch }) => {
         <input
           type="text"
           onChange={(e) => setSearch(e.target.value)}
-          className="mx-3 w-[75%] bg-transparent"
+          className="mx-3 w-[70%] bg-transparent"
         />
       </form>
     </>
