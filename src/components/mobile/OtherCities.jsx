@@ -32,7 +32,9 @@ const OtherCities = ({ data, handleSearch }) => (
         </div>
       ))}
     </div>
-    <Map data={data} />
+    <div className="max-h-[150px] w-full">
+      <Map data={data} />
+    </div>
   </div>
 );
 

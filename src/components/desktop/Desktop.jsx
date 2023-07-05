@@ -4,6 +4,7 @@ import Forecast from "./Forecast";
 import Charts from "../Charts";
 import Map from "../Map";
 import OtherCitiesDesktop from "./OtherCitiesDesktop";
+import DesktopNavbar from "./DesktopNavbar";
 
 const Desktop = ({ list = [], city, handleSearch, otherCityData }) => {
   const [today, setToday] = useState([]);
@@ -68,23 +69,35 @@ const Desktop = ({ list = [], city, handleSearch, otherCityData }) => {
   }
 
   return (
-    <div className="grid grid-cols-[3fr_1fr]">
-      <Forecast
-        today={today}
-        otherDays={otherDays}
-        icon={iconObj[list[0]?.weather[0]?.icon]}
-        city={city}
-      />
-      <Charts weather={today} />
-      <Map data={otherCityData} />
-      <div>
-        {otherCityData.map((city) => (
-          <OtherCitiesDesktop
-            data={city}
-            key={city.name}
-            icon={iconObj[city?.weather[0]?.icon]}
+    <div className="m-auto min-h-screen w-[80%] rounded-3xl bg-black">
+      <DesktopNavbar city={city} handleSearch={handleSearch} />
+      <div className="grid grid-cols-1 gap-5 px-6 lg:grid-cols-[3fr_1fr] ">
+        <div>
+          <h2 className="py-2 text-lg">Forecast</h2>
+          <Forecast
+            today={today}
+            otherDays={otherDays}
+            icon={iconObj[list[0]?.weather[0]?.icon]}
+            city={city}
           />
-        ))}
+        </div>
+        <Charts weather={today} />
+        <div className="max-h-[300px]">
+          <h2 className="py-2 text-lg">Global Map </h2>
+          <Map data={otherCityData} />
+        </div>
+        <div>
+          <h2 className="py-2 text-lg">Other Cities</h2>
+          <div className="max-h-[300px] overflow-y-scroll">
+            {otherCityData.map((city) => (
+              <OtherCitiesDesktop
+                data={city}
+                key={city.name}
+                icon={iconObj[city?.weather[0]?.icon]}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

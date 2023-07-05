@@ -78,7 +78,7 @@ const Mobile = ({ list = [], city, handleSearch, otherCityData }) => {
   }
 
   return (
-    <div className="flex  h-full flex-col  justify-around overflow-hidden p-3">
+    <div className="flex h-full flex-col  justify-around overflow-hidden p-3">
       {mode.home ? (
         <WeatherTab
           todayWeather={today}

@@ -36,8 +36,8 @@ const WeatherTab = ({ city, todayWeather, icon = [] }) => (
         </div>
       </div>
     </div>
-    <Charts weather={todayWeather} />
     <Carousel data={todayWeather} />
+    <Charts weather={todayWeather} />
   </div>
 );
 

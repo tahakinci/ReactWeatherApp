@@ -2,15 +2,15 @@ import React from "react";
 
 const Charts = ({ weather }) => {
   return (
-    <div className="w-full py-2 ">
+    <div className="flex w-full flex-col justify-between py-2 ">
       <h3 className="py-2 text-lg ">Rain</h3>
-      <div className="flex h-[100px] w-full items-end ">
+      <div className="flex h-[100px] w-full grow items-end ">
         {weather.map((hour) => (
           <div
             key={hour.dt}
             className="flex h-full grow flex-col items-center justify-end"
           >
-            <span className="mb-auto">
+            <span className="mb-auto text-gray-400">
               {hour?.rain ? Math.round(hour?.rain["3h"] * 10) : 0}%
             </span>
             <div
@@ -19,7 +19,7 @@ const Charts = ({ weather }) => {
               }}
               className="w-full border-t-2 border-blue-500 bg-blue-200 "
             ></div>
-            <div className="text-xs min-[380px]:text-base ">
+            <div className="text-xs text-gray-400 min-[380px]:text-base">
               {hour.dt_txt.substring(11, 16)}
             </div>
           </div>
