@@ -1,12 +1,13 @@
 import Mobile from "./mobile/Mobile";
 import Desktop from "./desktop/Desktop";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import useWeatherData from "../constants/useWeatherData";
 import { useQuery } from "@tanstack/react-query";
 import fetchCities from "../constants/fetchCities";
 const SearchParams = ({ coord }) => {
   const [city, setCity] = useState([]);
   const [mode, setMode] = useState(true);
+  const [windowSize, setWindowSize] = useState(0);
   const citiesID = [2988507, 2643743, 3173435, 3117735];
 
   //coord contains user coordinate. before user input any city useWeatherDayta fetches users coordinate weather
@@ -33,6 +34,15 @@ const SearchParams = ({ coord }) => {
     }
   };
 
+  useLayoutEffect(() => {
+    function updateSize() {
+      setWindowSize(window.innerWidth);
+    }
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
   return (
     <div
       id="deneme"
@@ -41,7 +51,7 @@ const SearchParams = ({ coord }) => {
       <button onClick={() => toggleDevice()} className="absolute">
         Click me
       </button>
-      {mode ? (
+      {windowSize < 500 || mode ? (
         <div className="h-[100vh]">
           <Mobile
             {...weatherData}

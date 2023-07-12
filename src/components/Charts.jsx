@@ -10,7 +10,7 @@ const Charts = ({ weather }) => {
             key={hour.dt}
             className="flex h-full grow flex-col items-center justify-end"
           >
-            <span className="mb-auto text-gray-400">
+            <span className="mb-auto text-xs text-gray-400">
               {hour?.rain ? Math.round(hour?.rain["3h"] * 10) : 0}%
             </span>
             <div
@@ -19,7 +19,7 @@ const Charts = ({ weather }) => {
               }}
               className="w-full border-t-2 border-blue-500 bg-blue-200 "
             ></div>
-            <div className="text-xs text-gray-400 min-[380px]:text-base">
+            <div className="text-xs text-gray-400">
               {hour.dt_txt.substring(11, 16)}
             </div>
           </div>

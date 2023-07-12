@@ -69,7 +69,7 @@ const Desktop = ({ list = [], city, handleSearch, otherCityData }) => {
   }
 
   return (
-    <div className="m-auto min-h-screen w-[80%] rounded-3xl bg-black">
+    <div className="m-auto min-h-screen w-[85%] rounded-3xl">
       <DesktopNavbar city={city} handleSearch={handleSearch} />
       <div className="grid grid-cols-1 gap-5 px-6 lg:grid-cols-[3fr_1fr] ">
         <div>
