@@ -1,4 +1,6 @@
-const iconObj = {
+
+
+const iconObj: {[k:string] : string[]} = {
     "01d": ["./assets/clear sky day.png", "http://cdn-icons-png.flaticon.com/32/7780/7780231.png"],
     "01n": ["./assets/clear sky night.png", "http://cdn-icons-png.flaticon.com/32/3982/3982176.png"],
     "02d": ["./assets/few clouds day.png", "http://cdn-icons-png.flaticon.com/32/1777/1777329.png"],
