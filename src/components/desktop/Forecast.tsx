@@ -1,8 +1,16 @@
 import { useState, useEffect } from "react";
 import FiveDaysForecast from "./FiveDaysForecast";
 import iconObj from "../../constants/iconObj";
+import { CityAPIRes, ListAPIRes } from "../../WeatherAPIResponseTypes";
 
-const Forecast = ({ today, otherDays, icon = [], city }) => {
+type ForecastPropType = {
+  today: ListAPIRes[];
+  otherDays: ListAPIRes[][];
+  icon: string[];
+  city: CityAPIRes;
+};
+
+const Forecast = ({ today, otherDays, icon = [], city }: ForecastPropType) => {
   const [time, setTime] = useState("");
   useEffect(() => {
     setInterval(hour, 1000);
@@ -26,7 +34,7 @@ const Forecast = ({ today, otherDays, icon = [], city }) => {
       <div className="rounded-2xl bg-[#222248]">
         <div className="flex justify-between rounded-t-2xl  bg-indigo-900 p-4">
           <p className="text-xl font-bold">
-            {Date(today[0]?.dt).substring(0, 4)}
+            {new Date(today[0]?.dt).toDateString().substring(0, 4)}
           </p>
           <p className="text-xl font-bold">{time}</p>
         </div>

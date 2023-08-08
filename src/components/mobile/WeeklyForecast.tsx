@@ -1,8 +1,17 @@
 import React from "react";
 import Carousel from "./Carousel";
 import WeeklyForecastContent from "./WeeklyForecastContent";
+import { ListAPIRes } from "../../WeatherAPIResponseTypes";
 
-const WeeklyForecast = ({ todayWeather, weeklyWeather }) => (
+type WeeklyForecastPropsType = {
+  todayWeather: ListAPIRes[];
+  weeklyWeather: ListAPIRes[][];
+};
+
+const WeeklyForecast = ({
+  todayWeather,
+  weeklyWeather,
+}: WeeklyForecastPropsType) => (
   <div className="flex grow flex-col overflow-hidden">
     <h2 className=" p-5 text-center text-2xl">Forecast report</h2>
     <div>

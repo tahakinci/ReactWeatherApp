@@ -1,5 +1,5 @@
 import { QueryFunction } from "@tanstack/react-query";
-import { ForecastAPIRes } from "../WeatherAPIResponsTypes";
+import { ForecastAPIRes } from "../WeatherAPIResponseTypes";
 
 export interface fetchWeatherInput {
   query?: string;
@@ -13,7 +13,7 @@ const API_KEY = import.meta.env.REACT_APP_API_KEY;
 
 const fetchWeather: QueryFunction<
   ForecastAPIRes,
-  ["city", fetchWeatherInput]
+  ["city", fetchWeatherInput | undefined]
 > = async ({ queryKey }) => {
   const search = queryKey[1];
 

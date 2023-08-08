@@ -1,4 +1,11 @@
-const FiveDaysForecast = ({ data, icon }) => (
+import { ListAPIRes } from "../../WeatherAPIResponseTypes";
+
+type FiveDaysForecastPropsType = {
+  data: ListAPIRes[];
+  icon: string;
+};
+
+const FiveDaysForecast = ({ data, icon }: FiveDaysForecastPropsType) => (
   <div className="mr-5 flex grow  flex-col flex-wrap items-center justify-around rounded-2xl bg-[#222248] last:mr-0">
     <p>{`${new Date(data[4].dt * 1000)}`.substring(0, 4)}</p>
     <img

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, MutableRefObject } from "react";
 import CarouselContent from "./CarouselContent";
 import iconObj from "../../constants/iconObj";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,10 +6,15 @@ import {
   faChevronRight,
   faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
+import { ListAPIRes } from "../../WeatherAPIResponseTypes";
 
-const Carousel = ({ data }) => {
+type CarouselPropsType = {
+  data: ListAPIRes[];
+};
+
+const Carousel = ({ data }: CarouselPropsType) => {
   const [curr, setCurr] = useState(0);
-  const element = useRef();
+  const element = useRef() as MutableRefObject<HTMLDivElement>;
 
   const prev = () =>
     setCurr((curr) => (curr === 0 ? data.length - 2 : curr - 1));

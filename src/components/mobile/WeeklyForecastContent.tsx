@@ -1,6 +1,11 @@
+import { ListAPIRes } from "../../WeatherAPIResponseTypes";
 import iconObj from "../../constants/iconObj";
 
-const WeeklyForecastContent = ({ data }) => {
+type WeeklyForecastContent = {
+  data: ListAPIRes[];
+};
+
+const WeeklyForecastContent = ({ data }: WeeklyForecastContent) => {
   const date = `${new Date(data[4].dt * 1000)}`;
   return (
     <div className="my-4 flex w-full items-center justify-around rounded-2xl bg-[#222248] p-2  hover:bg-indigo-700 focus:bg-indigo-700 ">

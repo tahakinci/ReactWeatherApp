@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { HandleSearch } from "./SearchParams";
 
-const SearchButton = ({ handleSearch }) => {
+const SearchButton = ({ handleSearch }: { handleSearch: HandleSearch }) => {
   const [search, setSearch] = useState("");
   return (
     <>

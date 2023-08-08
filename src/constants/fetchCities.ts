@@ -1,9 +1,9 @@
 import { QueryFunction } from "@tanstack/react-query";
-import { OtherCitiesAPIRes } from "../WeatherAPIResponsTypes";
+import { FetchCities } from "../WeatherAPIResponseTypes";
 
 const API_KEY = import.meta.env.REACT_APP_API_KEY;
 const fetchCities: QueryFunction<
-  OtherCitiesAPIRes,
+  FetchCities,
   ["otherCities", number[]]
 > = async ({ queryKey }) => {
   const id = queryKey[1];

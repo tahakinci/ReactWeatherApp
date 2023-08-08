@@ -2,8 +2,15 @@ import React from "react";
 import SearchButton from "../SearchButton";
 import iconObj from "../../constants/iconObj";
 import Map from "../Map";
+import { OtherCitiesAPIRes } from "../../WeatherAPIResponseTypes";
+import { HandleSearch } from "../SearchParams";
 
-const OtherCities = ({ data, handleSearch }) => (
+type OtherCitiesPropsType = {
+  data: OtherCitiesAPIRes[];
+  handleSearch: HandleSearch;
+};
+
+const OtherCities = ({ data, handleSearch }: OtherCitiesPropsType) => (
   <div className="flex w-full grow flex-col items-center justify-between p-5">
     <h2 className="p-4 text-2xl">Pick location</h2>
     <SearchButton handleSearch={handleSearch} />

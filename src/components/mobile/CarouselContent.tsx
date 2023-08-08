@@ -1,5 +1,12 @@
-import { Link } from "react-router-dom";
-const CarouselContent = ({ data, icon, id }) => (
+import { ListAPIRes } from "../../WeatherAPIResponseTypes";
+
+type CarouselContentPropsType = {
+  data: ListAPIRes;
+  icon: string[];
+  id?: number;
+};
+
+const CarouselContent = ({ data, icon }: CarouselContentPropsType) => (
   <div className="w-[150px] ">
     <img
       src={icon[0]}

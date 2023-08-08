@@ -1,6 +1,11 @@
-import React from "react";
+import { OtherCitiesAPIRes } from "../../WeatherAPIResponseTypes";
 
-const OtherCitiesDesktop = ({ data, icon }) => (
+type OCDPropsType = {
+  data: OtherCitiesAPIRes;
+  icon: string[];
+};
+
+const OtherCitiesDesktop = ({ data, icon }: OCDPropsType) => (
   <div className="mb-4 rounded-2xl bg-[#222248] p-4 last:mb-0 ">
     <div className="mb-2 flex items-center justify-between">
       <div>

@@ -1,12 +1,19 @@
 import Carousel from "./Carousel";
 import Charts from "../Charts";
+import { ListAPIRes } from "../../WeatherAPIResponseTypes";
 
-const WeatherTab = ({ city, todayWeather, icon = [] }) => (
+type WeatherTabPropsType = {
+  city: string[];
+  todayWeather: ListAPIRes[];
+  icon: string[];
+};
+
+const WeatherTab = ({ city, todayWeather, icon = [] }: WeatherTabPropsType) => (
   <div className=" flex w-full grow flex-col justify-around ">
     <div className="flex flex-col items-center justify-center py-4">
       <h2 className="pb-2 text-2xl font-bold ">{city[1]}</h2>
       <p className="text-s font-normal text-gray-400">
-        {Date(todayWeather[0]?.dt).substring(4, 15)}
+        {new Date(todayWeather[0]?.dt).toDateString().substring(4, 15)}
       </p>
     </div>
     <div className="mb-4 flex w-full flex-col items-center justify-center">

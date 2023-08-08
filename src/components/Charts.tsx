@@ -1,6 +1,10 @@
-import React from "react";
+import { ListAPIRes } from "../WeatherAPIResponseTypes";
 
-const Charts = ({ weather }) => {
+type ChartsPropsType = {
+  weather: ListAPIRes[];
+};
+
+const Charts = ({ weather }: ChartsPropsType) => {
   return (
     <div className="flex w-full flex-col justify-between py-2 ">
       <h3 className="py-2 text-lg ">Rain</h3>

@@ -7,8 +7,15 @@ import {
   faMoon,
   faMobile,
 } from "@fortawesome/free-solid-svg-icons";
+import { CityAPIRes } from "../../WeatherAPIResponseTypes";
+import { HandleSearch } from "../SearchParams";
 
-const DesktopNavbar = ({ handleSearch, city }) => {
+type DesktopNavbarPropsType = {
+  city: CityAPIRes;
+  handleSearch: HandleSearch;
+};
+
+const DesktopNavbar = ({ handleSearch, city }: DesktopNavbarPropsType) => {
   return (
     <div className="flex items-center justify-between p-4">
       <div className="rounded-[2rem] bg-[#222248] text-[2rem] md:text-[1rem]">

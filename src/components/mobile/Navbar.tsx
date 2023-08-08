@@ -6,13 +6,22 @@ import {
   faSun,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Navbar = ({ TODO_ }) => {
+type NavbarPropsType = {
+  TODO: (value: {
+    home: boolean;
+    search: boolean;
+    forecast: boolean;
+    darkMode: boolean;
+  }) => void;
+};
+
+const Navbar = ({ TODO }: NavbarPropsType) => {
   return (
     <div className="flex w-full items-center justify-around py-4">
       <button
         value={"home"}
         onClick={() =>
-          TODO_({
+          TODO({
             home: true,
             search: false,
             forecast: false,
@@ -25,7 +34,7 @@ const Navbar = ({ TODO_ }) => {
       <button
         value={"search"}
         onClick={() =>
-          TODO_({
+          TODO({
             home: false,
             search: true,
             forecast: false,
@@ -38,7 +47,7 @@ const Navbar = ({ TODO_ }) => {
       <button
         value={"forecast"}
         onClick={() =>
-          TODO_({
+          TODO({
             home: false,
             search: false,
             forecast: true,
@@ -51,7 +60,7 @@ const Navbar = ({ TODO_ }) => {
       <button
         value={"darkMode"}
         onClick={() =>
-          TODO_({
+          TODO({
             home: true,
             search: false,
             forecast: false,
