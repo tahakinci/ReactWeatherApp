@@ -19,7 +19,7 @@ export type CityAPIRes = {
 
 export type ListAPIRes = {
   dt: number;
-  dt_txt: number;
+  dt_txt: string;
   main: {
     feels_like: number;
     humidity: number;
@@ -27,6 +27,9 @@ export type ListAPIRes = {
     temp: number;
     temp_max: number;
     temp_min: number;
+  };
+  rain?: {
+    "3h": number;
   };
   weather: {
     [k: number]: {
@@ -43,28 +46,32 @@ export type ListAPIRes = {
 };
 
 export type OtherCitiesAPIRes = {
-  [k: number]: {
-    dt: number;
-    id: number;
-    main: {
-      feels_like: number;
-      humidity: number;
-      pressure: number;
-      temp: number;
-      temp_max: number;
-      temp_min: number;
-    };
-    name: number;
-    sys: { [k: string]: number };
-    weather: {
+  dt: number;
+  id: number;
+  main: {
+    feels_like: number;
+    humidity: number;
+    pressure: number;
+    temp: number;
+    temp_max: number;
+    temp_min: number;
+  };
+  name: string;
+  sys: { [k: string]: number };
+  weather: {
+    [k: number]: {
       description: string;
       icon: string;
       id: number;
       main: string;
     };
-    wind: {
-      deg?: number;
-      speed: number;
-    };
   };
+  wind: {
+    deg?: number;
+    speed: number;
+  };
+};
+
+export type FetchCities = {
+  list: OtherCitiesAPIRes[];
 };
