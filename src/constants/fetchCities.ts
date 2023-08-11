@@ -12,7 +12,7 @@ const fetchCities: QueryFunction<
 
   const res = await fetch(apiUrl);
   if (!res.ok) {
-    throw new Error("Network response was not ok");
+    throw new Error("Network response is not ok");
   }
   return res.json();
 };

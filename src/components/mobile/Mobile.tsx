@@ -13,17 +13,19 @@ import { useWeatherData } from "../../useWeatherData";
 import { HandleSearch } from "../SearchParams";
 
 export type MobileandDesktopPropsType = {
-  list: ListAPIRes[];
-  city: CityAPIRes;
   handleSearch: HandleSearch;
   otherCityData: OtherCitiesAPIRes[];
+  city: CityAPIRes;
+  list: ListAPIRes[];
+  windowSize?: number;
 };
 
 const Mobile = ({
   list = [],
   city,
-  handleSearch,
   otherCityData,
+  windowSize,
+  handleSearch,
 }: MobileandDesktopPropsType) => {
   const [mode, setMode] = useState({
     home: true,
@@ -44,7 +46,11 @@ const Mobile = ({
   const [today, otherDays] = useWeatherData(list);
 
   return (
-    <div className="flex h-full flex-col  justify-around overflow-hidden p-3">
+    <div
+      className={`flex h-full max-w-[500px]  flex-col justify-around overflow-hidden p-3 ${
+        windowSize ? (windowSize > 500 ? "border-2" : null) : null
+      }`}
+    >
       {mode.home ? (
         <WeatherTab
           todayWeather={today}

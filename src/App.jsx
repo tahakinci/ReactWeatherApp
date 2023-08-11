@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 
 const App = () => {
   const [locationCoord, setLocationCoord] = useState([]);
+
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -29,15 +30,16 @@ const App = () => {
   const errorCallback = (error) => {
     console.log(error);
   };
+
   return (
     <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient} >
         <Routes>
           <Route path="details/:id" element={<Details />} />
           <Route path="/" element={<SearchParams coord={locationCoord} />} />
         </Routes>
 
-        <ReactQueryDevtools initialIsOpen={true} />
+        <ReactQueryDevtools />
       </QueryClientProvider>
     </BrowserRouter>
   );

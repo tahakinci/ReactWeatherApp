@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import fetchCities from "../constants/fetchCities";
 import SearchButton from "./SearchButton";
 import fetchWeather, { fetchWeatherInput } from "../constants/fetchWeather";
+import { ModeButton } from "../ModeButton";
 
 export type HandleSearch = (value: string) => void;
 
@@ -12,8 +13,8 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
   const [city, setCity] = useState<fetchWeatherInput>();
   const [mode, setMode] = useState(true);
   const [windowSize, setWindowSize] = useState(0);
-  const citiesID = [2988507, 2643743, 3173435, 3117735];
 
+  const citiesID = [2988507, 2643743, 3173435, 3117735];
   //coord contains user coordinate. before user input any city useWeatherDayta fetches users coordinate weather
   //TODO : find a way to make city state's initial value to coord without using useEffect!
 
@@ -27,6 +28,16 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
       });
     }
   }, [coord]);
+
+  useLayoutEffect(() => {
+    function updateSize() {
+      setWindowSize(window.innerWidth);
+    }
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
   //fetching data with TanstackQuery
   const fetchedWeather = useQuery(["city", city], fetchWeather);
   const weatherData = fetchedWeather.data;
@@ -41,31 +52,15 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
     });
   };
 
-  const toggleDevice = () => {
-    const element = document.getElementById("root");
-    if (mode) {
-      if (element) {
-        setMode(false);
-        element.style.maxWidth = "1600px";
-      }
+  function toggleDeviceMode() {
+    if (windowSize > 500 && !mode) {
+      setMode(true);
     } else {
-      if (element) {
-        element.style.maxWidth = "425px";
-        setMode(true);
-      }
+      setMode(false);
     }
-  };
+  }
 
-  useLayoutEffect(() => {
-    function updateSize() {
-      setWindowSize(window.innerWidth);
-    }
-    window.addEventListener("resize", updateSize);
-    updateSize();
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-
-  if (!city) {
+  if (!weatherData) {
     return (
       <div className=" flex h-screen w-full items-center justify-center bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-indigo-900 from-5% to-slate-900 to-20% font-['Oxanium'] text-white">
         <div className="w-[50%]">
@@ -81,19 +76,16 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
   }
 
   return (
-    <div
-      id="deneme"
-      className=" w-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-indigo-900 from-5%  to-slate-900 to-20% font-['Oxanium'] text-white"
-    >
-      <button onClick={() => toggleDevice()} className="absolute">
-        Click me
-      </button>
-      {windowSize < 500 || mode ? (
-        <div className="h-[100vh]">
+    <div className=" w-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-indigo-900 from-5%  to-slate-900 to-20% font-['Oxanium'] text-white">
+      {windowSize > 500 ? <ModeButton toggleDevice={toggleDeviceMode} /> : null}
+
+      {!mode || windowSize < 500 ? (
+        <div className="flex h-[100vh] items-center justify-center">
           <Mobile
             {...weatherData}
             handleSearch={handleSearch}
             otherCityData={otherCityData}
+            windowSize={windowSize}
           />
         </div>
       ) : (

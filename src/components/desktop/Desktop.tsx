@@ -31,7 +31,11 @@ const Desktop = ({
         <Charts weather={today} />
         <div className="max-h-[300px]">
           <h2 className="py-2 text-lg">Global Map </h2>
-          <Map data={otherCityData} />
+          {otherCityData.length ? (
+            <Map data={otherCityData} />
+          ) : (
+            <h1>Loading...</h1>
+          )}
         </div>
         <div>
           <h2 className="py-2 text-lg">Other Cities</h2>

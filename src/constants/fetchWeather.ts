@@ -30,9 +30,7 @@ const fetchWeather: QueryFunction<
   } else if (search.coordinates) {
     baseUrl += `&lat=${search.coordinates.lat}&lon=${search.coordinates.lon}`;
   }
-
   const apiRes = await fetch(baseUrl);
-
   if (!apiRes.ok) {
     throw new Error(`Weather API ${search} is not ok!`);
   }
