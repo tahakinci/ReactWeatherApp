@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 const App = () => {
   const [locationCoord, setLocationCoord] = useState([]);
 
-  const queryClient = new QueryClient({
+   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
         staleTime: Infinity,
@@ -18,6 +18,7 @@ const App = () => {
       },
     },
   });
+
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
@@ -38,8 +39,7 @@ const App = () => {
           <Route path="details/:id" element={<Details />} />
           <Route path="/" element={<SearchParams coord={locationCoord} />} />
         </Routes>
-
-        <ReactQueryDevtools />
+          <ReactQueryDevtools />
       </QueryClientProvider>
     </BrowserRouter>
   );
