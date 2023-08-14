@@ -18,6 +18,8 @@ export type MobileandDesktopPropsType = {
   city: CityAPIRes;
   list: ListAPIRes[];
   windowSize?: number;
+  darkMode: boolean;
+  toggleThemeMode: () => void;
 };
 
 const Mobile = ({
