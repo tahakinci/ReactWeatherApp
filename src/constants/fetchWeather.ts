@@ -17,7 +17,9 @@ const fetchWeather: QueryFunction<
 > = async ({ queryKey }) => {
   const search = queryKey[1];
 
-  if (!search) return [];
+  if (!search) {
+    throw new Error("Missing search parameter");
+  }
 
   // i'm fecthing user's coordinate using navigator.geolocation
   // this fuction gives me lat, and lon array but i also get city name from users when they submited
