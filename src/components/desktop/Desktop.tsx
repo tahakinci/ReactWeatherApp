@@ -12,12 +12,19 @@ const Desktop = ({
   city,
   handleSearch,
   otherCityData,
+  darkMode,
+  toggleThemeMode,
 }: MobileandDesktopPropsType) => {
   const [today, otherDays] = useWeatherData(list);
 
   return (
     <div className="m-auto min-h-screen w-[85%] rounded-3xl">
-      <DesktopNavbar city={city} handleSearch={handleSearch} />
+      <DesktopNavbar
+        city={city}
+        handleSearch={handleSearch}
+        darkMode={darkMode}
+        toggleThemeMode={toggleThemeMode}
+      />
       <div className="grid grid-cols-1 gap-5 px-6 lg:grid-cols-[3fr_1fr] ">
         <div>
           <h2 className="py-2 text-lg">Forecast</h2>
@@ -26,13 +33,14 @@ const Desktop = ({
             otherDays={otherDays}
             icon={iconObj[list[0]?.weather[0]?.icon]}
             city={city}
+            darkMode={darkMode}
           />
         </div>
         <Charts weather={today} />
         <div className="max-h-[300px]">
           <h2 className="py-2 text-lg">Global Map </h2>
           {otherCityData.length ? (
-            <Map data={otherCityData} />
+            <Map data={otherCityData} darkMode={darkMode} />
           ) : (
             <h1>Loading...</h1>
           )}
@@ -45,6 +53,7 @@ const Desktop = ({
                 data={city}
                 key={city.name}
                 icon={iconObj[city?.weather[0]?.icon]}
+                darkMode={darkMode}
               />
             ))}
           </div>

@@ -3,10 +3,15 @@ import { OtherCitiesAPIRes } from "../../WeatherAPIResponseTypes";
 type OCDPropsType = {
   data: OtherCitiesAPIRes;
   icon: string[];
+  darkMode: boolean;
 };
 
-const OtherCitiesDesktop = ({ data, icon }: OCDPropsType) => (
-  <div className="mb-4 rounded-2xl bg-[#222248] p-4 last:mb-0 ">
+const OtherCitiesDesktop = ({ data, icon, darkMode }: OCDPropsType) => (
+  <div
+    className={`${
+      darkMode ? "bg-[#222248]" : "bg-sky-300"
+    } mb-4 rounded-2xl p-4 last:mb-0`}
+  >
     <div className="mb-2 flex items-center justify-between">
       <div>
         <p className="text-sm text-gray-400">{data.sys.country}</p>
