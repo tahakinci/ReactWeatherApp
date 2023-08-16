@@ -14,16 +14,16 @@ const Charts = ({ weather }: ChartsPropsType) => {
             key={hour.dt}
             className="flex h-full grow flex-col items-center justify-end"
           >
-            <span className="mb-auto text-xs text-gray-400">
-              {hour?.rain ? Math.round(hour?.rain["3h"] * 10) : 0}%
+            <span className="mb-auto text-xs text-white dark:text-gray-400">
+              {hour?.rain ? Math.round((hour?.rain["3h"] * 10) / 3) : 0}%
             </span>
             <div
               style={{
-                height: (hour.rain ? hour.rain["3h"] * 10 : 0) + "%",
+                height: (hour.rain ? (hour.rain["3h"] * 10) / 3 : 0) + "%",
               }}
-              className="w-full border-t-2 border-blue-500 bg-blue-200 "
+              className="w-full border-t-2 border-blue-900 bg-blue-200 dark:border-blue-500 "
             ></div>
-            <div className="text-xs text-gray-400">
+            <div className="text-xs text-white dark:text-gray-400">
               {hour.dt_txt.substring(11, 16)}
             </div>
           </div>

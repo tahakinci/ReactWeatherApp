@@ -14,11 +14,11 @@ const OtherCities = ({ data, handleSearch }: OtherCitiesPropsType) => (
   <div className="flex w-full grow flex-col items-center justify-between p-5">
     <h2 className="p-4 text-2xl">Pick location</h2>
     <SearchButton handleSearch={handleSearch} />
-    <div className="my-6 grid grid-cols-2 gap-4 ">
+    <div className="my-6 grid grid-cols-2 gap-4">
       {data.map((city) => (
         <div
           key={city.name}
-          className="grow rounded-2xl bg-[#222248] p-4 hover:bg-indigo-700  "
+          className="grow rounded-2xl bg-sky-300 p-4 hover:bg-amber-200 dark:bg-[#222248] dark:hover:bg-indigo-700  "
         >
           <div className="flex justify-between gap-4 ">
             <div>

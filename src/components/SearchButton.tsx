@@ -3,13 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { HandleSearch } from "./SearchParams";
 
-const SearchButton = ({
-  handleSearch,
-  darkMode,
-}: {
-  handleSearch: HandleSearch;
-  darkMode: boolean;
-}) => {
+const SearchButton = ({ handleSearch }: { handleSearch: HandleSearch }) => {
   const [search, setSearch] = useState("");
   return (
     <>
@@ -18,9 +12,8 @@ const SearchButton = ({
           e.preventDefault();
           handleSearch(search);
         }}
-        className={`${
-          darkMode ? "bg-[#222248]" : "bg-sky-300"
-        } w-full rounded-xl border-none p-3`}
+        className="w-full
+         rounded-xl border-none bg-sky-300 p-3 dark:bg-[#222248]"
       >
         <button type="submit" className="px-2">
           <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />

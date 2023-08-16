@@ -3,19 +3,10 @@ import { ListAPIRes } from "../../WeatherAPIResponseTypes";
 type FiveDaysForecastPropsType = {
   data: ListAPIRes[];
   icon: string;
-  darkMode: boolean;
 };
 
-const FiveDaysForecast = ({
-  data,
-  icon,
-  darkMode,
-}: FiveDaysForecastPropsType) => (
-  <div
-    className={`${
-      darkMode ? "bg-[#222248]" : "bg-sky-300"
-    } mr-5 flex grow  flex-col flex-wrap items-center justify-around rounded-2xl bg-[#222248] last:mr-0`}
-  >
+const FiveDaysForecast = ({ data, icon }: FiveDaysForecastPropsType) => (
+  <div className="mr-5 flex grow flex-col  flex-wrap items-center justify-around rounded-2xl bg-sky-300 last:mr-0 dark:bg-[#222248]">
     <p>{`${new Date(data[4].dt * 1000)}`.substring(0, 4)}</p>
     <img
       src={icon}

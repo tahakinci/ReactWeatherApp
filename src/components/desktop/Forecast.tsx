@@ -8,16 +8,9 @@ type ForecastPropType = {
   otherDays: ListAPIRes[][];
   icon: string[];
   city: CityAPIRes;
-  darkMode: boolean;
 };
 
-const Forecast = ({
-  today,
-  otherDays,
-  icon = [],
-  city,
-  darkMode,
-}: ForecastPropType) => {
+const Forecast = ({ today, otherDays, icon = [], city }: ForecastPropType) => {
   const [time, setTime] = useState("");
   useEffect(() => {
     setInterval(hour, 1000);
@@ -38,14 +31,8 @@ const Forecast = ({
   }
   return (
     <div className="flex flex-col gap-4 lg:flex-row ">
-      <div
-        className={`${darkMode ? "bg-[#222248]" : "bg-sky-300"} rounded-2xl`}
-      >
-        <div
-          className={`${
-            darkMode ? "bg-indigo-900" : "bg-sky-400"
-          } flex justify-between rounded-t-2xl  p-4`}
-        >
+      <div className="rounded-2xl bg-sky-300 dark:bg-[#222248]">
+        <div className="flex justify-between rounded-t-2xl bg-sky-400 p-4  dark:bg-indigo-900">
           <p className="text-xl font-bold">
             {new Date(today[0]?.dt).toDateString().substring(0, 4)}
           </p>
@@ -104,7 +91,6 @@ const Forecast = ({
             key={day[0].dt}
             data={day}
             icon={iconObj[day[0].weather[0].icon][0]}
-            darkMode={darkMode}
           />
         ))}
       </div>

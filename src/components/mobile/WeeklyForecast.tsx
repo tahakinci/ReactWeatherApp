@@ -17,7 +17,7 @@ const WeeklyForecast = ({
     <div>
       <Carousel data={todayWeather} />
     </div>
-    <div className="overflow-y-scroll">
+    <div className="mt-4 overflow-y-scroll scrollbar-thin scrollbar-track-sky-300 scrollbar-thumb-amber-200 scrollbar-track-rounded scrollbar-thumb-rounded dark:scrollbar-track-[#222248] dark:scrollbar-thumb-indigo-900">
       {weeklyWeather.map((day) => (
         <WeeklyForecastContent data={day} key={day[0].dt} />
       ))}

@@ -8,7 +8,7 @@ type WeeklyForecastContent = {
 const WeeklyForecastContent = ({ data }: WeeklyForecastContent) => {
   const date = `${new Date(data[4].dt * 1000)}`;
   return (
-    <div className="my-4 flex w-full items-center justify-around rounded-2xl bg-[#222248] p-2  hover:bg-indigo-700 focus:bg-indigo-700 ">
+    <div className="my-4 mr-2 flex items-center justify-around rounded-2xl bg-sky-300 p-2 first:mt-0 hover:bg-amber-200 focus:bg-amber-200 dark:bg-[#222248]  dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 ">
       <div>
         <p className="font-bold leading-8">{date.substring(0, 4)}</p>
         <p className="text-sm text-gray-400">{date.substring(4, 10)}</p>

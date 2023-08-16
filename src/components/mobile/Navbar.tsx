@@ -3,8 +3,8 @@ import {
   faHouse,
   faMagnifyingGlass,
   faChartLine,
-  faSun,
 } from "@fortawesome/free-solid-svg-icons";
+import { DarkModeToggleButton } from "../../DarkModeToggleButton";
 
 type NavbarPropsType = {
   TODO: (value: {
@@ -57,19 +57,7 @@ const Navbar = ({ TODO }: NavbarPropsType) => {
       >
         <FontAwesomeIcon icon={faChartLine} size="xl" />
       </button>
-      <button
-        value={"darkMode"}
-        onClick={() =>
-          TODO({
-            home: true,
-            search: false,
-            forecast: false,
-            darkMode: false,
-          })
-        }
-      >
-        <FontAwesomeIcon icon={faSun} size="xl" />
-      </button>
+      <DarkModeToggleButton />
     </div>
   );
 };

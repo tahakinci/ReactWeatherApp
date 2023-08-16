@@ -12,12 +12,10 @@ export type HandleSearch = (value: string) => void;
 const SearchParams = ({ coord }: { coord: number[] }) => {
   const [city, setCity] = useState<fetchWeatherInput>({});
   const [mode, setMode] = useState(true);
-  const [darkMode, setDarkMode] = useState(true);
   const [windowSize, setWindowSize] = useState(0);
 
   const citiesID = [2988507, 2643743, 3173435, 3117735];
   //coord contains user coordinate. before user input any city useWeatherDayta fetches users coordinate weather
-  //TODO : find a way to make city state's initial value to coord without using useEffect!
 
   useEffect(() => {
     if (coord.length) {
@@ -50,9 +48,7 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
   // });
   // const weatherData = data;
 
-  const { data } = useQuery(["city", city], fetchWeather, {
-    retry: false,
-  });
+  const { data } = useQuery(["city", city], fetchWeather);
   const weatherData = data;
 
   //fetching other cities
@@ -73,20 +69,19 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
     }
   }
 
-  function toggleThemeMode() {
-    setDarkMode(() => !darkMode);
-  }
-
   if (!weatherData) {
     return (
-      <div className=" flex h-screen w-full items-center justify-center bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-indigo-900 from-5% to-slate-900 to-20% font-['Oxanium'] text-white">
+      <div
+        className=" flex h-screen w-full items-center justify-center bg-sky-500 font-['Oxanium'] text-white
+      dark:bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))]  dark:from-indigo-900 dark:from-5% dark:to-slate-900 dark:to-20%"
+      >
         <div className="w-[50%]">
           <p className="center">
             You probably didnt share your location with us or something went
             wrong
           </p>
           <p className="center">Please enter the city you want to search</p>
-          <SearchButton handleSearch={handleSearch} darkMode={darkMode} />
+          <SearchButton handleSearch={handleSearch} />
         </div>
       </div>
     );
@@ -94,11 +89,8 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
 
   return (
     <div
-      className={`${
-        darkMode
-          ? "bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-indigo-900  from-5% to-slate-900 to-20%"
-          : "bg-blue-500"
-      } w-full  font-['Oxanium'] text-white`}
+      className="w-full bg-sky-500 font-['Oxanium'] text-white dark:bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))]
+       dark:from-indigo-900  dark:from-5% dark:to-slate-900 dark:to-20%"
     >
       {windowSize > 500 ? <ModeButton toggleDevice={toggleDeviceMode} /> : null}
       {!mode || windowSize < 500 ? (
@@ -108,7 +100,6 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
             handleSearch={handleSearch}
             otherCityData={otherCityData}
             windowSize={windowSize}
-            darkMode={darkMode}
           />
         </div>
       ) : (
@@ -116,8 +107,6 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
           {...weatherData}
           handleSearch={handleSearch}
           otherCityData={otherCityData}
-          darkMode={darkMode}
-          toggleThemeMode={toggleThemeMode}
         />
       )}
     </div>
