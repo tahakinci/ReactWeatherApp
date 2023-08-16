@@ -13,9 +13,10 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
   const [city, setCity] = useState<fetchWeatherInput>({});
   const [mode, setMode] = useState(true);
   const [windowSize, setWindowSize] = useState(0);
+  const [unit, setUnit] = useState("metric");
 
   const citiesID = [2988507, 2643743, 3173435, 3117735];
-  //coord contains user coordinate. before user input any city useWeatherDayta fetches users coordinate weather
+  //coord contains user coordinate. before user input any city useWeatherData fetches users coordinate weather
 
   useEffect(() => {
     if (coord.length) {
@@ -48,11 +49,17 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
   // });
   // const weatherData = data;
 
-  const { data } = useQuery(["city", city], fetchWeather);
+  const { data } = useQuery({
+    queryKey: ["city", city, unit],
+    queryFn: fetchWeather,
+  });
   const weatherData = data;
 
   //fetching other cities
-  const fechedCityData = useQuery(["otherCities", citiesID], fetchCities);
+  const fechedCityData = useQuery({
+    queryKey: ["otherCities", citiesID, unit],
+    queryFn: fetchCities,
+  });
   const otherCityData = fechedCityData.data?.list ?? [];
 
   const handleSearch: HandleSearch = (value) => {
@@ -67,6 +74,10 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
     } else {
       setMode(false);
     }
+  }
+
+  function handleUnit(value: string | undefined) {
+    setUnit(value);
   }
 
   if (!weatherData) {
@@ -100,6 +111,8 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
             handleSearch={handleSearch}
             otherCityData={otherCityData}
             windowSize={windowSize}
+            handleUnit={handleUnit}
+            unit={unit}
           />
         </div>
       ) : (
@@ -107,6 +120,8 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
           {...weatherData}
           handleSearch={handleSearch}
           otherCityData={otherCityData}
+          handleUnit={handleUnit}
+          unit={unit}
         />
       )}
     </div>

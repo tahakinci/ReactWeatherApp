@@ -6,15 +6,31 @@ type WeatherTabPropsType = {
   city: string[];
   todayWeather: ListAPIRes[];
   icon: string[];
+  unit: string;
+  handleUnit: (arg: string | undefined) => void;
 };
 
-const WeatherTab = ({ city, todayWeather, icon = [] }: WeatherTabPropsType) => (
+const WeatherTab = ({
+  city,
+  todayWeather,
+  icon = [],
+  unit,
+  handleUnit,
+}: WeatherTabPropsType) => (
   <div className=" flex w-full grow flex-col justify-around ">
     <div className="flex flex-col items-center justify-center py-4">
       <h2 className="pb-2 text-2xl font-bold ">{city[1]}</h2>
       <p className="text-s font-normal text-gray-400">
-        {new Date(todayWeather[0]?.dt).toDateString().substring(4, 15)}
+        {new Date(todayWeather[0]?.dt * 1000).toDateString().substring(4, 15)}
       </p>
+      <button
+        onClick={() => {
+          const unitOptions = ["metric", "imperial"];
+          handleUnit(unitOptions.find((element) => element != unit));
+        }}
+      >
+        click me
+      </button>
     </div>
     <div className="mb-4 flex w-full flex-col items-center justify-center">
       <img
@@ -26,13 +42,17 @@ const WeatherTab = ({ city, todayWeather, icon = [] }: WeatherTabPropsType) => (
         <div>
           <p className="text-lg leading-6 text-gray-400 ">Temp</p>
           <p className="text-base font-semibold">
-            {Math.round(todayWeather[0]?.main?.temp)}°C
+            {Math.round(todayWeather[0]?.main?.temp)}°
+            {unit === "metric" ? "C" : "F"}
           </p>
         </div>
         <div>
           <p className="text-lg text-gray-400">Wind</p>
           <p className="text-base font-semibold">
-            {todayWeather[0]?.wind?.speed} km/h
+            {unit === "metric"
+              ? todayWeather[0]?.wind?.speed
+              : (todayWeather[0]?.wind?.speed / 1.5).toFixed(2)}{" "}
+            {unit === "metric" ? "km/h" : "m/s"}
           </p>
         </div>
         <div>
@@ -43,8 +63,8 @@ const WeatherTab = ({ city, todayWeather, icon = [] }: WeatherTabPropsType) => (
         </div>
       </div>
     </div>
-    <Carousel data={todayWeather} />
-    <Charts weather={todayWeather} />
+    <Carousel data={todayWeather} unit={unit} />
+    <Charts weather={todayWeather} unit={unit} />
   </div>
 );
 

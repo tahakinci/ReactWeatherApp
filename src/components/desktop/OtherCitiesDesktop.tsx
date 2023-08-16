@@ -3,9 +3,10 @@ import { OtherCitiesAPIRes } from "../../WeatherAPIResponseTypes";
 type OCDPropsType = {
   data: OtherCitiesAPIRes;
   icon: string[];
+  unit: string;
 };
 
-const OtherCitiesDesktop = ({ data, icon }: OCDPropsType) => (
+const OtherCitiesDesktop = ({ data, icon, unit }: OCDPropsType) => (
   <div className="mb-4 mr-2 rounded-2xl bg-sky-300 p-4  last:mb-0 dark:bg-[#222248]">
     <div className="mb-2 flex items-center justify-between">
       <div>
@@ -20,7 +21,9 @@ const OtherCitiesDesktop = ({ data, icon }: OCDPropsType) => (
     </div>
     <div className="flex items-center justify-between">
       <p className="text-sm">{data.weather[0].description}</p>
-      <p>{Math.round(data.main.temp)}°C</p>
+      <p>
+        {Math.round(data.main.temp)}°{unit === "metric" ? "C" : "F"}
+      </p>
     </div>
   </div>
 );

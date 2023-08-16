@@ -10,9 +10,10 @@ import { ListAPIRes } from "../../WeatherAPIResponseTypes";
 
 type CarouselPropsType = {
   data: ListAPIRes[];
+  unit: string;
 };
 
-const Carousel = ({ data }: CarouselPropsType) => {
+const Carousel = ({ data, unit }: CarouselPropsType) => {
   const [curr, setCurr] = useState(0);
   const element = useRef() as MutableRefObject<HTMLDivElement>;
 
@@ -36,6 +37,7 @@ const Carousel = ({ data }: CarouselPropsType) => {
               data={hour}
               icon={iconObj[hour.weather[0].icon]}
               key={hour.dt}
+              unit={unit}
             />
           ))}
         </div>

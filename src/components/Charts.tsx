@@ -2,9 +2,10 @@ import { ListAPIRes } from "../WeatherAPIResponseTypes";
 
 type ChartsPropsType = {
   weather: ListAPIRes[];
+  unit: string;
 };
 
-const Charts = ({ weather }: ChartsPropsType) => {
+const Charts = ({ weather, unit }: ChartsPropsType) => {
   return (
     <div className="flex w-full flex-col justify-between py-2 ">
       <h3 className="py-2 text-lg ">Rain</h3>
@@ -24,7 +25,13 @@ const Charts = ({ weather }: ChartsPropsType) => {
               className="w-full border-t-2 border-blue-900 bg-blue-200 dark:border-blue-500 "
             ></div>
             <div className="text-xs text-white dark:text-gray-400">
-              {hour.dt_txt.substring(11, 16)}
+              {new Date(hour.dt_txt).toLocaleTimeString(
+                [unit === "metric" ? "it-IT" : "en-US"],
+                {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                }
+              )}
             </div>
           </div>
         ))}

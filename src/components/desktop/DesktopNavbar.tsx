@@ -8,9 +8,14 @@ import { DarkModeToggleButton } from "../../DarkModeToggleButton";
 type DesktopNavbarPropsType = {
   city: CityAPIRes;
   handleSearch: HandleSearch;
+  handleUnit: (arg: string) => void;
 };
 
-const DesktopNavbar = ({ handleSearch, city }: DesktopNavbarPropsType) => {
+const DesktopNavbar = ({
+  handleSearch,
+  city,
+  handleUnit,
+}: DesktopNavbarPropsType) => {
   return (
     <div className="flex items-center justify-between p-4">
       <div>
@@ -25,8 +30,18 @@ const DesktopNavbar = ({ handleSearch, city }: DesktopNavbarPropsType) => {
       <div className="min-w-[50%]">
         <SearchButton handleSearch={handleSearch} />
       </div>
-
-      <DarkModeToggleButton />
+      <div className="flex gap-5">
+        <div>
+          <select
+            className="text-black"
+            onChange={(e) => handleUnit(e.target.value)}
+          >
+            <option value="metric">metric</option>
+            <option value="imperial">imperial</option>
+          </select>
+        </div>
+        <DarkModeToggleButton />
+      </div>
     </div>
   );
 };

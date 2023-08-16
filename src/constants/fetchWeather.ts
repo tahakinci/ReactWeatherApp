@@ -16,6 +16,7 @@ const fetchWeather: QueryFunction<
   ["city", fetchWeatherInput | undefined]
 > = async ({ queryKey }) => {
   const search = queryKey[1];
+  const unit = queryKey[2];
 
   if (!search) {
     throw new Error("Missing search parameter");
@@ -24,7 +25,7 @@ const fetchWeather: QueryFunction<
   // i'm fecthing user's coordinate using navigator.geolocation
   // this fuction gives me lat, and lon array but i also get city name from users when they submited
   // so the search parameter can be string or array
-  let baseUrl = `https://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}&units=metric`;
+  let baseUrl = `https://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}&units=${unit}`;
   // if search parameter  is string adding url to "q=" and search
   if (search.query) {
     baseUrl += `&q=${search.query}`;

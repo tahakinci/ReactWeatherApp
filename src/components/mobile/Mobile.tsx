@@ -14,10 +14,12 @@ import { HandleSearch } from "../SearchParams";
 
 export type MobileandDesktopPropsType = {
   handleSearch: HandleSearch;
+  handleUnit: (arg: string | undefined) => void;
   otherCityData: OtherCitiesAPIRes[];
   city: CityAPIRes;
   list: ListAPIRes[];
   windowSize?: number;
+  unit: string;
 };
 
 const Mobile = ({
@@ -25,7 +27,9 @@ const Mobile = ({
   city,
   otherCityData,
   windowSize,
+  unit,
   handleSearch,
+  handleUnit,
 }: MobileandDesktopPropsType) => {
   const [mode, setMode] = useState({
     home: true,
@@ -56,11 +60,21 @@ const Mobile = ({
           todayWeather={today}
           city={[city?.country, city?.name]}
           icon={iconObj[list[0]?.weather[0]?.icon]}
+          unit={unit}
+          handleUnit={handleUnit}
         />
       ) : mode.search ? (
-        <OtherCities data={otherCityData} handleSearch={handleSearch} />
+        <OtherCities
+          data={otherCityData}
+          handleSearch={handleSearch}
+          unit={unit}
+        />
       ) : (
-        <WeeklyForecast todayWeather={today} weeklyWeather={otherDays} />
+        <WeeklyForecast
+          todayWeather={today}
+          weeklyWeather={otherDays}
+          unit={unit}
+        />
       )}
 
       <Navbar TODO={TODO} />

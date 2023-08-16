@@ -19,6 +19,7 @@ const Navbar = ({ TODO }: NavbarPropsType) => {
   return (
     <div className="flex w-full items-center justify-around py-4">
       <button
+        className="hover:scale-125"
         value={"home"}
         onClick={() =>
           TODO({
@@ -32,6 +33,7 @@ const Navbar = ({ TODO }: NavbarPropsType) => {
         <FontAwesomeIcon icon={faHouse} size="xl" />
       </button>
       <button
+        className="hover:scale-125"
         value={"search"}
         onClick={() =>
           TODO({
@@ -45,6 +47,7 @@ const Navbar = ({ TODO }: NavbarPropsType) => {
         <FontAwesomeIcon icon={faMagnifyingGlass} size="xl" />
       </button>
       <button
+        className="hover:scale-125"
         value={"forecast"}
         onClick={() =>
           TODO({

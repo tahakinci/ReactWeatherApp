@@ -7,8 +7,9 @@ const fetchCities: QueryFunction<
   ["otherCities", number[]]
 > = async ({ queryKey }) => {
   const id = queryKey[1];
+  const unit = queryKey[2];
   const cityIdString = id.join(",");
-  const apiUrl = `https://api.openweathermap.org/data/2.5/group?id=${cityIdString}&appid=${API_KEY}&units=metric`;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/group?id=${cityIdString}&appid=${API_KEY}&units=${unit}`;
 
   const res = await fetch(apiUrl);
   if (!res.ok) {

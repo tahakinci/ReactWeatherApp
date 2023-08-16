@@ -8,9 +8,16 @@ type ForecastPropType = {
   otherDays: ListAPIRes[][];
   icon: string[];
   city: CityAPIRes;
+  unit: string;
 };
 
-const Forecast = ({ today, otherDays, icon = [], city }: ForecastPropType) => {
+const Forecast = ({
+  today,
+  otherDays,
+  icon = [],
+  city,
+  unit,
+}: ForecastPropType) => {
   const [time, setTime] = useState("");
   useEffect(() => {
     setInterval(hour, 1000);
@@ -23,10 +30,13 @@ const Forecast = ({ today, otherDays, icon = [], city }: ForecastPropType) => {
 
   function hour() {
     const date = new Date();
-    const time = date.toLocaleTimeString(["en-US"], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
+    const time = date.toLocaleTimeString(
+      [unit === "metric" ? "it-IT" : "en-US"],
+      {
+        hour: "2-digit",
+        minute: "2-digit",
+      }
+    );
     setTime(time);
   }
   return (
@@ -40,7 +50,9 @@ const Forecast = ({ today, otherDays, icon = [], city }: ForecastPropType) => {
         </div>
         <div className="flex flex-row p-4 lg:flex-col">
           <div className="flex justify-between gap-4">
-            <p className="text-[3rem]">{Math.round(today[0]?.main?.temp)}°C</p>
+            <p className="text-[3rem]">
+              {Math.round(today[0]?.main?.temp)}°{unit === "metric" ? "C" : "F"}
+            </p>
             <img
               src={icon[0]}
               alt={today[0]?.weather[0]?.description}
@@ -51,11 +63,15 @@ const Forecast = ({ today, otherDays, icon = [], city }: ForecastPropType) => {
             <div className="flex w-full grow items-center justify-between lg:block">
               <p className="text-sm">
                 <span className="text-gray-400">Real Feel:</span>{" "}
-                {Math.round(today[0]?.main?.feels_like)}°C
+                {Math.round(today[0]?.main?.feels_like)}°
+                {unit === "metric" ? "C" : "F"}
               </p>
               <p className="text-sm">
                 <span className="text-gray-400">Wind:</span>{" "}
-                {today[0]?.wind.speed} km/h
+                {unit === "metric"
+                  ? today[0]?.wind.speed
+                  : (today[0]?.wind.speed / 1.5).toFixed(2)}{" "}
+                {unit === "metric" ? "km/h" : "m/h"}
               </p>
               <p className="text-sm">
                 <span className="text-gray-400">Pressure:</span>{" "}
@@ -69,17 +85,23 @@ const Forecast = ({ today, otherDays, icon = [], city }: ForecastPropType) => {
             <div className="flex grow items-center justify-center gap-4 lg:block lg:self-end">
               <p className="text-sm">
                 <span className="text-gray-400">Sunrise: {""}</span>
-                {sunrise.toLocaleTimeString(["en-us"], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
+                {sunrise.toLocaleTimeString(
+                  [unit === "metric" ? "it-IT" : "en-US"],
+                  {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  }
+                )}
               </p>
               <p className="text-sm">
                 <span className="text-gray-400">Sunset: {""}</span>
-                {sunset.toLocaleTimeString(["en-us"], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
+                {sunset.toLocaleTimeString(
+                  [unit === "metric" ? "it-IT" : "en-US"],
+                  {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  }
+                )}
               </p>
             </div>
           </div>
@@ -91,6 +113,7 @@ const Forecast = ({ today, otherDays, icon = [], city }: ForecastPropType) => {
             key={day[0].dt}
             data={day}
             icon={iconObj[day[0].weather[0].icon][0]}
+            unit={unit}
           />
         ))}
       </div>
