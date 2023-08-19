@@ -18,7 +18,7 @@ const App = () => {
       },
     },
   });
-
+  
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);

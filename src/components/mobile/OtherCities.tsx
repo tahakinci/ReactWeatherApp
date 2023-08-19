@@ -26,7 +26,9 @@ const OtherCities = ({ data, handleSearch, unit }: OtherCitiesPropsType) => (
               <p className="text-2xl font-bold leading-8 ">
                 {Math.round(city.main.temp)}°{unit === "metric" ? "C" : "F"}
               </p>
-              <p className="text-sm text-gray-400">{city.weather[0].main}</p>
+              <p className="text-sm dark:text-gray-400 ">
+                {city.weather[0].main}
+              </p>
             </div>
             <div>
               <img
