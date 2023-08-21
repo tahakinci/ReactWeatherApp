@@ -13,7 +13,7 @@ const API_KEY = import.meta.env.REACT_APP_API_KEY;
 
 const fetchWeather: QueryFunction<
   ForecastAPIRes,
-  ["city", fetchWeatherInput | undefined]
+  ["city", fetchWeatherInput | undefined, "metric" | "imperial"]
 > = async ({ queryKey }) => {
   const search = queryKey[1];
   const unit = queryKey[2];
