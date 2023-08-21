@@ -4,7 +4,7 @@ import { FetchCities } from "../WeatherAPIResponseTypes";
 const API_KEY = import.meta.env.REACT_APP_API_KEY;
 const fetchCities: QueryFunction<
   FetchCities,
-  ["otherCities", number[]]
+  ["otherCities", number[], "metric" | "imperal"]
 > = async ({ queryKey }) => {
   const id = queryKey[1];
   const unit = queryKey[2];

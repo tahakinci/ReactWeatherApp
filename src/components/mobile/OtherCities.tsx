@@ -9,12 +9,18 @@ type OtherCitiesPropsType = {
   data: OtherCitiesAPIRes[];
   handleSearch: HandleSearch;
   unit: string;
+  isFailed: boolean;
 };
 
-const OtherCities = ({ data, handleSearch, unit }: OtherCitiesPropsType) => (
+const OtherCities = ({
+  data,
+  handleSearch,
+  unit,
+  isFailed,
+}: OtherCitiesPropsType) => (
   <div className="flex w-full grow flex-col items-center justify-between p-5">
     <h2 className="p-4 text-2xl">Pick location</h2>
-    <SearchButton handleSearch={handleSearch} />
+    <SearchButton handleSearch={handleSearch} isFailed={isFailed} />
     <div className="my-6 grid grid-cols-2 gap-4">
       {data.map((city) => (
         <div

@@ -1,6 +1,6 @@
 import Mobile from "./mobile/Mobile";
 import Desktop from "./desktop/Desktop";
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect, useLayoutEffect, SetStateAction } from "react";
 import { useQuery } from "@tanstack/react-query";
 import fetchCities from "../constants/fetchCities";
 import SearchButton from "./SearchButton";
@@ -14,6 +14,7 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
   const [mode, setMode] = useState(true);
   const [windowSize, setWindowSize] = useState(0);
   const [unit, setUnit] = useState("metric");
+  const [isFailed, setIsFailed] = useState(false);
 
   const citiesID = [2988507, 2643743, 3173435, 3117735];
   //coord contains user coordinate. before user input any city useWeatherData fetches users coordinate weather
@@ -38,22 +39,22 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
-  //fetching weather data with TanstackQuery
-
-  //   const queryKey =
-  //   city && city.query
-  //     ? ["city", city?.query]
-  //     : ["coordinates", city?.coordinates];
-  // const { data } = useQuery(queryKey, fetchWeather, {
-  //   retry: false,
-  // });
-  // const weatherData = data;
-
-  const { data } = useQuery({
+  const { data: newWeatherData, isSuccess } = useQuery({
     queryKey: ["city", city, unit],
     queryFn: fetchWeather,
+    retry: false,
   });
-  const weatherData = data;
+  const [weatherData, setWeatherData] = useState(newWeatherData);
+
+  // Update weatherData only if there's no error
+  useEffect(() => {
+    if (isSuccess) {
+      setWeatherData(newWeatherData);
+      setIsFailed(false);
+    } else {
+      setIsFailed(true);
+    }
+  }, [newWeatherData, isSuccess]);
 
   //fetching other cities
   const fechedCityData = useQuery({
@@ -67,7 +68,6 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
       query: value,
     });
   };
-
   function toggleDeviceMode() {
     if (windowSize > 500 && !mode) {
       setMode(true);
@@ -76,7 +76,7 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
     }
   }
 
-  function handleUnit(value: string | undefined) {
+  function handleUnit(value: string) {
     setUnit(value);
   }
 
@@ -86,13 +86,18 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
         className=" flex h-screen w-full items-center justify-center bg-sky-500 font-['Oxanium'] text-white
       dark:bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))]  dark:from-indigo-900 dark:from-5% dark:to-slate-900 dark:to-20%"
       >
-        <div className="w-[50%]">
-          <p className="center">
-            You probably didnt share your location with us or something went
-            wrong
-          </p>
-          <p className="center">Please enter the city you want to search</p>
-          <SearchButton handleSearch={handleSearch} />
+        <div className="w-[75%] sm:w-[50%]">
+          <div className="pb-4">
+            <p className="hidden text-center sm:block">
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
+              You haven't granted permission to access your location or
+              something went wrong.
+            </p>
+            <p className="text-center">
+              Please enter the city you want to search
+            </p>
+          </div>
+          <SearchButton handleSearch={handleSearch} isFailed={isFailed} />
         </div>
       </div>
     );
@@ -113,6 +118,7 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
             windowSize={windowSize}
             handleUnit={handleUnit}
             unit={unit}
+            isFailed={isFailed}
           />
         </div>
       ) : (
@@ -122,6 +128,7 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
           otherCityData={otherCityData}
           handleUnit={handleUnit}
           unit={unit}
+          isFailed={isFailed}
         />
       )}
     </div>

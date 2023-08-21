@@ -14,12 +14,13 @@ import { HandleSearch } from "../SearchParams";
 
 export type MobileandDesktopPropsType = {
   handleSearch: HandleSearch;
-  handleUnit: (arg: string | undefined) => void;
+  handleUnit: (arg: string) => void;
   otherCityData: OtherCitiesAPIRes[];
   city: CityAPIRes;
   list: ListAPIRes[];
   windowSize?: number;
   unit: string;
+  isFailed: boolean;
 };
 
 const Mobile = ({
@@ -30,6 +31,7 @@ const Mobile = ({
   unit,
   handleSearch,
   handleUnit,
+  isFailed,
 }: MobileandDesktopPropsType) => {
   const [mode, setMode] = useState({
     home: true,
@@ -68,6 +70,7 @@ const Mobile = ({
           data={otherCityData}
           handleSearch={handleSearch}
           unit={unit}
+          isFailed={isFailed}
         />
       ) : (
         <WeeklyForecast

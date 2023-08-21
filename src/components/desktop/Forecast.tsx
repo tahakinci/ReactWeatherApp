@@ -20,7 +20,7 @@ const Forecast = ({
 }: ForecastPropType) => {
   const [time, setTime] = useState("");
   useEffect(() => {
-    setInterval(hour, 1000);
+    setInterval(hour, 60000);
   }, []);
 
   const [sunrise, sunset] = [

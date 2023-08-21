@@ -1,3 +1,4 @@
+import { useState, useLayoutEffect } from "react";
 import { OtherCitiesAPIRes } from "../WeatherAPIResponseTypes";
 import iconObj from "../constants/iconObj";
 type MapPropsType = {
@@ -5,7 +6,19 @@ type MapPropsType = {
 };
 
 const Map = ({ data }: MapPropsType) => {
+  const [mapStyle, setMapStyle] = useState("");
+
   const GOOGLE_API_KEY = import.meta.env.REACT_API_KEY_GOOGLE;
+
+  useLayoutEffect(() => {
+    document.documentElement.className === "dark"
+      ? setMapStyle(
+          "&maptype=roadmap&style=element:labels%7Cvisibility:off&style=feature:administrative%7Celement:geometry%7Cvisibility:off&style=feature:administrative.land_parcel%7Cvisibility:off&style=feature:administrative.neighborhood%7Cvisibility:off&style=feature:landscape%7Celement:geometry.fill%7Ccolor:0x4238c9&style=feature:poi%7Cvisibility:off&style=feature:road%7Cvisibility:off&style=feature:road%7Celement:labels.icon%7Cvisibility:off&style=feature:transit%7Cvisibility:off&style=feature:water%7Celement:geometry.fill%7Ccolor:0x222248&size=360x240"
+        )
+      : setMapStyle(
+          "&maptype=roadmap&style=element:labels%7Cvisibility:off&style=feature:administrative%7Celement:geometry%7Cvisibility:off&style=feature:administrative.land_parcel%7Cvisibility:off&style=feature:administrative.neighborhood%7Cvisibility:off&style=feature:poi%7Cvisibility:off&style=feature:road%7Cvisibility:off&style=feature:road%7Celement:labels.icon%7Cvisibility:off&style=feature:transit%7Cvisibility:off&size=360x240"
+        );
+  }, []);
 
   const mapURL = `
     https://maps.googleapis.com/maps/api/staticmap?key=${GOOGLE_API_KEY}&zoom=3&format=png&markers=icon:${
@@ -14,11 +27,9 @@ const Map = ({ data }: MapPropsType) => {
     data[1]?.name
   }&markers=icon:${iconObj[data[2].weather[0].icon][1]}|${
     data[2]?.name
-  }&markers=icon:${iconObj[data[3].weather[0].icon][1]}|${data[3]?.name}${
-    document.documentElement.className === "dark"
-      ? "&maptype=roadmap&style=element:labels%7Cvisibility:off&style=feature:administrative%7Celement:geometry%7Cvisibility:off&style=feature:administrative.land_parcel%7Cvisibility:off&style=feature:administrative.neighborhood%7Cvisibility:off&style=feature:landscape%7Celement:geometry.fill%7Ccolor:0x4238c9&style=feature:poi%7Cvisibility:off&style=feature:road%7Cvisibility:off&style=feature:road%7Celement:labels.icon%7Cvisibility:off&style=feature:transit%7Cvisibility:off&style=feature:water%7Celement:geometry.fill%7Ccolor:0x222248&size=360x240"
-      : "&maptype=roadmap&style=element:labels%7Cvisibility:off&style=feature:administrative%7Celement:geometry%7Cvisibility:off&style=feature:administrative.land_parcel%7Cvisibility:off&style=feature:administrative.neighborhood%7Cvisibility:off&style=feature:poi%7Cvisibility:off&style=feature:road%7Cvisibility:off&style=feature:road%7Celement:labels.icon%7Cvisibility:off&style=feature:transit%7Cvisibility:off&size=360x240"
-  }
+  }&markers=icon:${iconObj[data[3].weather[0].icon][1]}|${
+    data[3]?.name
+  }${mapStyle}
     `;
   return (
     <>

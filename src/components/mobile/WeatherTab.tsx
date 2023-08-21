@@ -7,7 +7,7 @@ type WeatherTabPropsType = {
   todayWeather: ListAPIRes[];
   icon: string[];
   unit: string;
-  handleUnit: (arg: string | undefined) => void;
+  handleUnit: (arg: string) => void;
 };
 
 const WeatherTab = ({

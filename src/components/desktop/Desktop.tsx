@@ -14,14 +14,17 @@ const Desktop = ({
   handleUnit,
   unit,
   otherCityData,
+  isFailed,
 }: MobileandDesktopPropsType) => {
   const [today, otherDays] = useWeatherData(list);
+
   return (
     <div className="m-auto min-h-screen w-[85%] rounded-3xl">
       <DesktopNavbar
         city={city}
         handleSearch={handleSearch}
         handleUnit={handleUnit}
+        isFailed={isFailed}
       />
       <div className="grid grid-cols-1 gap-5 px-6 lg:grid-cols-[3fr_1fr] ">
         <div>

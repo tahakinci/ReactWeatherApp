@@ -9,12 +9,14 @@ type DesktopNavbarPropsType = {
   city: CityAPIRes;
   handleSearch: HandleSearch;
   handleUnit: (arg: string) => void;
+  isFailed: boolean;
 };
 
 const DesktopNavbar = ({
   handleSearch,
   city,
   handleUnit,
+  isFailed,
 }: DesktopNavbarPropsType) => {
   return (
     <div className="flex items-center justify-between p-4">
@@ -28,7 +30,7 @@ const DesktopNavbar = ({
         </p>
       </div>
       <div className="min-w-[50%]">
-        <SearchButton handleSearch={handleSearch} />
+        <SearchButton handleSearch={handleSearch} isFailed={isFailed} />
       </div>
       <div className="flex gap-5">
         <div className="relative inline-block text-white">
