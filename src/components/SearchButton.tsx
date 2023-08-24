@@ -18,10 +18,9 @@ const SearchButton = ({
           e.preventDefault();
           handleSearch(search);
         }}
-        className={`w-full
-         rounded-xl  bg-sky-300 p-3 transition dark:bg-[#222248] ${
-           isFailed ? "animate-shake border-2 border-red-500" : "border-none"
-         }`}
+        className={`w-full rounded-xl bg-sky-300 p-3 transition dark:bg-[#222248] ${
+          isFailed ? "animate-shake border-2 border-red-500" : "border-none"
+        }`}
       >
         <button type="submit" className="px-2">
           <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />

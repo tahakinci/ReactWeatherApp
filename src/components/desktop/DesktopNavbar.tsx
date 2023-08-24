@@ -8,7 +8,7 @@ import { DarkModeToggleButton } from "../../DarkModeToggleButton";
 type DesktopNavbarPropsType = {
   city: CityAPIRes;
   handleSearch: HandleSearch;
-  handleUnit: (arg: string) => void;
+  handleUnit: (arg: "metric" | "imperial") => void;
   isFailed: boolean;
 };
 
@@ -36,7 +36,9 @@ const DesktopNavbar = ({
         <div className="relative inline-block text-white">
           <select
             className="appearance-none rounded-md border-none bg-transparent py-2 pl-3 pr-8 outline-none"
-            onChange={(e) => handleUnit(e.target.value)}
+            onChange={(e) =>
+              handleUnit(e.target.value as "metric" | "imperial")
+            }
           >
             <option className="bg-gray-800" value="metric">
               Metric

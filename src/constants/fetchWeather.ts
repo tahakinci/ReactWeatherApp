@@ -9,12 +9,17 @@ export interface fetchWeatherInput {
   };
 }
 
+type QueryKeyType = [
+  string,
+  fetchWeatherInput | undefined,
+  "metric" | "imperial"
+];
+
 const API_KEY = import.meta.env.REACT_APP_API_KEY;
 
-const fetchWeather: QueryFunction<
-  ForecastAPIRes,
-  ["city", fetchWeatherInput | undefined, "metric" | "imperial"]
-> = async ({ queryKey }) => {
+const fetchWeather: QueryFunction<ForecastAPIRes, QueryKeyType> = async ({
+  queryKey,
+}) => {
   const search = queryKey[1];
   const unit = queryKey[2];
 

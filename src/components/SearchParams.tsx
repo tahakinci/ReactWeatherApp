@@ -1,6 +1,6 @@
 import Mobile from "./mobile/Mobile";
 import Desktop from "./desktop/Desktop";
-import { useState, useEffect, useLayoutEffect, SetStateAction } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import fetchCities from "../constants/fetchCities";
 import SearchButton from "./SearchButton";
@@ -13,7 +13,7 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
   const [city, setCity] = useState<fetchWeatherInput>({});
   const [mode, setMode] = useState(true);
   const [windowSize, setWindowSize] = useState(0);
-  const [unit, setUnit] = useState("metric");
+  const [unit, setUnit] = useState<"metric" | "imperial">("metric");
   const [isFailed, setIsFailed] = useState(false);
 
   const citiesID = [2988507, 2643743, 3173435, 3117735];
@@ -29,7 +29,6 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
       });
     }
   }, [coord]);
-
   useLayoutEffect(() => {
     function updateSize() {
       setWindowSize(window.innerWidth);
@@ -47,6 +46,7 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
   const [weatherData, setWeatherData] = useState(newWeatherData);
 
   // Update weatherData only if there's no error
+
   useEffect(() => {
     if (isSuccess) {
       setWeatherData(newWeatherData);
@@ -54,7 +54,7 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
     } else {
       setIsFailed(true);
     }
-  }, [newWeatherData, isSuccess]);
+  }, [newWeatherData]);
 
   //fetching other cities
   const fechedCityData = useQuery({
@@ -76,7 +76,7 @@ const SearchParams = ({ coord }: { coord: number[] }) => {
     }
   }
 
-  function handleUnit(value: string) {
+  function handleUnit(value: "metric" | "imperial") {
     setUnit(value);
   }
 

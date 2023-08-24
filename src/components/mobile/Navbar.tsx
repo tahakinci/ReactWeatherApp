@@ -7,26 +7,24 @@ import {
 import { DarkModeToggleButton } from "../../DarkModeToggleButton";
 
 type NavbarPropsType = {
-  TODO: (value: {
+  modeSwitch: (value: {
     home: boolean;
     search: boolean;
     forecast: boolean;
-    darkMode: boolean;
   }) => void;
 };
 
-const Navbar = ({ TODO }: NavbarPropsType) => {
+const Navbar = ({ modeSwitch }: NavbarPropsType) => {
   return (
     <div className="flex w-full items-center justify-around py-4">
       <button
         className="hover:scale-125"
         value={"home"}
         onClick={() =>
-          TODO({
+          modeSwitch({
             home: true,
             search: false,
             forecast: false,
-            darkMode: true,
           })
         }
       >
@@ -36,11 +34,10 @@ const Navbar = ({ TODO }: NavbarPropsType) => {
         className="hover:scale-125"
         value={"search"}
         onClick={() =>
-          TODO({
+          modeSwitch({
             home: false,
             search: true,
             forecast: false,
-            darkMode: true,
           })
         }
       >
@@ -50,11 +47,10 @@ const Navbar = ({ TODO }: NavbarPropsType) => {
         className="hover:scale-125"
         value={"forecast"}
         onClick={() =>
-          TODO({
+          modeSwitch({
             home: false,
             search: false,
             forecast: true,
-            darkMode: true,
           })
         }
       >

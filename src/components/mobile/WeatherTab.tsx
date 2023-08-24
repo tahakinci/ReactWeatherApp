@@ -7,7 +7,7 @@ type WeatherTabPropsType = {
   todayWeather: ListAPIRes[];
   icon: string[];
   unit: string;
-  handleUnit: (arg: string) => void;
+  handleUnit: (arg: "metric" | "imperial") => void;
 };
 
 const WeatherTab = ({
@@ -30,8 +30,15 @@ const WeatherTab = ({
           value={unit}
           className="peer sr-only"
           onClick={() => {
-            const unitOptions = ["metric", "imperial"];
-            handleUnit(unitOptions.find((element) => element != unit));
+            const unitOptions: ("metric" | "imperial")[] = [
+              "metric",
+              "imperial",
+            ];
+            handleUnit(
+              unitOptions.find((element) => element !== unit) as
+                | "metric"
+                | "imperial"
+            );
           }}
         />
         <div className="peer flex h-6 w-12 items-center justify-center gap-2 rounded-full bg-amber-200 after:absolute after:left-[0px] after:h-6 after:w-6 after:rounded-full after:bg-sky-200 after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800">

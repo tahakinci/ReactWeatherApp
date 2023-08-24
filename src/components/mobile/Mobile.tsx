@@ -14,7 +14,7 @@ import { HandleSearch } from "../SearchParams";
 
 export type MobileandDesktopPropsType = {
   handleSearch: HandleSearch;
-  handleUnit: (arg: string) => void;
+  handleUnit: (arg: "metric" | "imperial") => void;
   otherCityData: OtherCitiesAPIRes[];
   city: CityAPIRes;
   list: ListAPIRes[];
@@ -37,14 +37,12 @@ const Mobile = ({
     home: true,
     search: false,
     forecast: false,
-    darkMode: true,
   });
 
-  const TODO = (value: {
+  const modeSwitch = (value: {
     home: boolean;
     search: boolean;
     forecast: boolean;
-    darkMode: boolean;
   }) => {
     setMode(value);
   };
@@ -80,7 +78,7 @@ const Mobile = ({
         />
       )}
 
-      <Navbar TODO={TODO} />
+      <Navbar modeSwitch={modeSwitch} />
     </div>
   );
 };

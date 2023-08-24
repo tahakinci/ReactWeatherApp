@@ -1,11 +1,12 @@
 import { QueryFunction } from "@tanstack/react-query";
 import { FetchCities } from "../WeatherAPIResponseTypes";
 
+type QueryKeyType = [string, number[], "metric" | "imperial"];
+
 const API_KEY = import.meta.env.REACT_APP_API_KEY;
-const fetchCities: QueryFunction<
-  FetchCities,
-  ["otherCities", number[], "metric" | "imperal"]
-> = async ({ queryKey }) => {
+const fetchCities: QueryFunction<FetchCities, QueryKeyType> = async ({
+  queryKey,
+}) => {
   const id = queryKey[1];
   const unit = queryKey[2];
   const cityIdString = id.join(",");
