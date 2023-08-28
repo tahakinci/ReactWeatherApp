@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import FiveDaysForecast from "./FiveDaysForecast";
-import iconObj from "../../constants/iconObj";
+import iconObj from "../../utils/iconObj";
 import { CityAPIRes, ListAPIRes } from "../../WeatherAPIResponseTypes";
 
 type ForecastPropType = {

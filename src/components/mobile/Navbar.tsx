@@ -4,7 +4,7 @@ import {
   faMagnifyingGlass,
   faChartLine,
 } from "@fortawesome/free-solid-svg-icons";
-import { DarkModeToggleButton } from "../../DarkModeToggleButton";
+import { DarkModeToggleButton } from "../DarkModeToggleButton";
 
 type NavbarPropsType = {
   modeSwitch: (value: {

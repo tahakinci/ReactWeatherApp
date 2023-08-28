@@ -1,10 +1,10 @@
-import iconObj from "../../constants/iconObj";
+import iconObj from "../../utils/iconObj";
 import Forecast from "./Forecast";
 import Charts from "../Charts";
 import Map from "../Map";
 import OtherCitiesDesktop from "./OtherCitiesDesktop";
 import DesktopNavbar from "./DesktopNavbar";
-import { useWeatherData } from "../../useWeatherData";
+import { useWeatherData } from "../../utils/hooks/useWeatherData";
 import { MobileandDesktopPropsType } from "../mobile/Mobile";
 
 const Desktop = ({

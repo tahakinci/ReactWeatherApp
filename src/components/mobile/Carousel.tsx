@@ -1,6 +1,6 @@
 import { useState, useRef, MutableRefObject } from "react";
 import CarouselContent from "./CarouselContent";
-import iconObj from "../../constants/iconObj";
+import iconObj from "../../utils/iconObj";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronRight,

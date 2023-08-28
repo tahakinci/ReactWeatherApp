@@ -1,6 +1,6 @@
 import React from "react";
 import SearchButton from "../SearchButton";
-import iconObj from "../../constants/iconObj";
+import iconObj from "../../utils/iconObj";
 import Map from "../Map";
 import { OtherCitiesAPIRes } from "../../WeatherAPIResponseTypes";
 import { HandleSearch } from "../SearchParams";

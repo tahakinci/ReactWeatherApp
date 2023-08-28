@@ -3,13 +3,13 @@ import WeatherTab from "./WeatherTab";
 import Navbar from "./Navbar";
 import OtherCities from "./OtherCities";
 import { useState } from "react";
-import iconObj from "../../constants/iconObj";
+import iconObj from "../../utils/iconObj";
 import {
   CityAPIRes,
   ListAPIRes,
   OtherCitiesAPIRes,
 } from "../../WeatherAPIResponseTypes";
-import { useWeatherData } from "../../useWeatherData";
+import { useWeatherData } from "../../utils/hooks/useWeatherData";
 import { HandleSearch } from "../SearchParams";
 
 export type MobileandDesktopPropsType = {

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { CityAPIRes } from "../../WeatherAPIResponseTypes";
 import { HandleSearch } from "../SearchParams";
-import { DarkModeToggleButton } from "../../DarkModeToggleButton";
+import { DarkModeToggleButton } from "../DarkModeToggleButton";
 
 type DesktopNavbarPropsType = {
   city: CityAPIRes;

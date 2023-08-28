@@ -1,4 +1,4 @@
-import { ListAPIRes } from "./WeatherAPIResponseTypes";
+import { ListAPIRes } from "../../WeatherAPIResponseTypes";
 
 interface SeperatedDaysType {
   [k: string]: ListAPIRes[];

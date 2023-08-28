@@ -2,10 +2,10 @@ import Mobile from "./mobile/Mobile";
 import Desktop from "./desktop/Desktop";
 import { useState, useEffect, useLayoutEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import fetchCities from "../constants/fetchCities";
+import fetchCities from "../utils/api/fetchCities";
 import SearchButton from "./SearchButton";
-import fetchWeather, { fetchWeatherInput } from "../constants/fetchWeather";
-import { ModeButton } from "../ModeButton";
+import fetchWeather, { fetchWeatherInput } from "../utils/api/fetchWeather";
+import { ModeButton } from "./ModeButton";
 
 export type HandleSearch = (value: string) => void;
 

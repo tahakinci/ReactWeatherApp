@@ -1,6 +1,6 @@
-import Carousel from "./Carousel";
 import Charts from "../Charts";
 import { ListAPIRes } from "../../WeatherAPIResponseTypes";
+import CarouselComp from "./Carousel";
 
 type WeatherTabPropsType = {
   city: string[];
@@ -80,7 +80,7 @@ const WeatherTab = ({
         </div>
       </div>
     </div>
-    <Carousel data={todayWeather} unit={unit} />
+    <CarouselComp data={todayWeather} unit={unit} />
     <Charts weather={todayWeather} unit={unit} />
   </div>
 );

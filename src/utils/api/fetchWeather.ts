@@ -1,5 +1,5 @@
 import { QueryFunction } from "@tanstack/react-query";
-import { ForecastAPIRes } from "../WeatherAPIResponseTypes";
+import { ForecastAPIRes } from "../../WeatherAPIResponseTypes";
 
 export interface fetchWeatherInput {
   query?: string;

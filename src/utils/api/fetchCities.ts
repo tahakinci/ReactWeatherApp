@@ -1,5 +1,5 @@
 import { QueryFunction } from "@tanstack/react-query";
-import { FetchCities } from "../WeatherAPIResponseTypes";
+import { FetchCities } from "../../WeatherAPIResponseTypes";
 
 type QueryKeyType = [string, number[], "metric" | "imperial"];
 

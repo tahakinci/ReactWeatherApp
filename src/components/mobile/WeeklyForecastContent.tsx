@@ -1,5 +1,5 @@
 import { ListAPIRes } from "../../WeatherAPIResponseTypes";
-import iconObj from "../../constants/iconObj";
+import iconObj from "../../utils/iconObj";
 
 type WeeklyForecastContent = {
   data: ListAPIRes[];
