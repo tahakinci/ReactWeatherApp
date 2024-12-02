@@ -10,7 +10,9 @@ const getAll = async () => {
 };
 
 const getCity = async (city: string): Promise<Forecast> => {
-  const res = await axios.get<Forecast>(`${baseUrl}?q=${city}&appid=${key}`);
+  const res = await axios.get<Forecast>(
+    `${baseUrl}?q=${city}&appid=${key}&units=metric`
+  );
   return res.data;
 };
 

@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import searchInputReducer from "./reducers/searchInputReducer";
+import weatherReducer from "./reducers/weatherReducer";
 
 export const store = configureStore({
   reducer: {
-    search: searchInputReducer,
+    weather: weatherReducer,
   },
 });
 
