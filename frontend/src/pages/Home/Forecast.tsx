@@ -8,12 +8,14 @@ type Props = {
 
 const Forecast = ({ splitedWeatherData }: Props) => {
   return (
-    <div style={{ display: "flex" }}>
-      {Object.entries(splitedWeatherData).map((day) => (
-        <Link key={day[0]} to={`/${day[0]}`}>
-          <ForecastByDay weatherData={day[1]} />
-        </Link>
-      ))}
+    <div className="col-span-2">
+      <div className="flex">
+        {Object.entries(splitedWeatherData).map((day) => (
+          <Link key={day[0]} to={`/${day[0]}`}>
+            <ForecastByDay weatherData={day[1]} />
+          </Link>
+        ))}
+      </div>
       <Outlet />
     </div>
   );

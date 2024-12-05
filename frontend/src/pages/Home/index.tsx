@@ -35,6 +35,8 @@ const Home = () => {
     <div>
       <div id="header">
         <SearchInput onSubmit={handleSearch} />
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3">
         {weatherData && <Forecast splitedWeatherData={weatherData} />}
       </div>
     </div>

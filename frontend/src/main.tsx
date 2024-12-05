@@ -3,6 +3,7 @@ import App from "./App.tsx";
 import { Provider } from "react-redux";
 import { store } from "./store.tsx";
 import { QueryClient, QueryClientProvider } from "react-query";
+import "./index.css";
 
 const queryClient = new QueryClient();
 

@@ -9,7 +9,7 @@ const ForecastDetail = () => {
   const detailData: List[] = useSelector((state) => state.weather[id]);
   console.log(detailData);
   return (
-    <div>
+    <div className="flex">
       {detailData.map((hour) => (
         <div key={hour.dt}>
           <Link to={dayjs(hour.dt_txt).format("HH:mm")}>

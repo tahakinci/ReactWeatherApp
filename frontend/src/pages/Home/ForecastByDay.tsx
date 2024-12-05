@@ -9,15 +9,13 @@ type Props = {
 const ForecastByDay = ({ weatherData }: Props) => {
   return (
     <div>
-      <div>
-        {dateToDayName(weatherData[0].dt_txt)}
-        <img
-          style={{ width: "100px" }}
-          src={`/assets/${iconById(weatherData[0].weather[0].id)}.png`}
-          alt=""
-        />
-        {weatherData[0].main.temp}
-      </div>
+      {dateToDayName(weatherData[0].dt_txt)}
+      <img
+        style={{ width: "100px" }}
+        src={`/assets/${iconById(weatherData[0].weather[0].id)}.png`}
+        alt=""
+      />
+      {weatherData[0].main.temp}
     </div>
   );
 };
