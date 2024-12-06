@@ -1,6 +1,5 @@
 import { useState } from "react";
 import SearchInput from "../../components/SearchInput";
-import { useFetchCityWeather } from "../../hooks/api";
 import Forecast from "./Forecast";
 import { splitWeatherByDate } from "../../utils/converters";
 import { useDispatch, useSelector } from "react-redux";
