@@ -6,10 +6,10 @@ type Props = {
   className: string;
 };
 
-const Card = ({ icon, header, children, footer, className }: Props) => {
+const Card = ({ icon, header, children, footer }: Props) => {
   return (
     <div
-      className={`bg-slate-400 p-3 rounded-2xl flex flex-col justify-between ${className}`}
+      className={`bg-slate-400 p-3 rounded-2xl flex flex-col justify-between`}
     >
       <div id="card-header" className="flex px-2 gap-2 items-center">
         {icon}

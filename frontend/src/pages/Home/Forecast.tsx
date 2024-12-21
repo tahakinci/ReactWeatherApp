@@ -1,22 +1,32 @@
-import { Link, Outlet } from "react-router-dom";
 import { List } from "../../types";
 import ForecastByDay from "./ForecastByDay";
+import { useState } from "react";
+import ForecastByHour from "./ForecastByHour";
 
 type Props = {
   splitedWeatherData: Record<string, List[]>;
 };
 
 const Forecast = ({ splitedWeatherData }: Props) => {
+  const [selectedWeatherData, setSelectedWeatherData] = useState<List[]>();
+
   return (
     <div className="col-span-2">
       <div className="flex">
         {Object.entries(splitedWeatherData).map((day) => (
-          <Link key={day[0]} to={`/${day[0]}`}>
-            <ForecastByDay weatherData={day[1]} />
-          </Link>
+          <div key={day[0]}>
+            <div>
+              <ForecastByDay
+                setSelectedWeatherData={setSelectedWeatherData}
+                weatherData={day[1]}
+              />
+            </div>
+          </div>
         ))}
       </div>
-      <Outlet />
+      <div className="flex">
+        <ForecastByHour data={selectedWeatherData ?? []} />
+      </div>
     </div>
   );
 };

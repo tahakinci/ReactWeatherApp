@@ -1,18 +1,22 @@
-import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { List } from "../../types";
 import { iconById } from "../../constants";
 import dayjs from "dayjs";
+import { setSelectedHourWeatherData } from "../../reducers/selectedHourReducer";
 
-const ForecastDetail = () => {
-  const { id } = useParams();
-  const detailData: List[] = useSelector((state) => state.weather[id]);
-  console.log(detailData);
+type Props = {
+  data: List[];
+};
+
+const ForecastByHour = ({ data }: Props) => {
+  const dispatch = useDispatch();
+
   return (
-    <div className="flex">
-      {detailData.map((hour) => (
+    <>
+      {data.map((hour) => (
         <div key={hour.dt}>
-          <Link to={dayjs(hour.dt_txt).format("HH:mm")}>
+          <button onClick={() => dispatch(setSelectedHourWeatherData(hour))}>
             <div>
               <p>{dayjs(hour.dt_txt).format("HH:mm")}</p>{" "}
               <img
@@ -22,11 +26,11 @@ const ForecastDetail = () => {
               />
               <p>{hour.main.temp}</p>
             </div>
-          </Link>
+          </button>
         </div>
       ))}
-    </div>
+    </>
   );
 };
 
-export default ForecastDetail;
+export default ForecastByHour;

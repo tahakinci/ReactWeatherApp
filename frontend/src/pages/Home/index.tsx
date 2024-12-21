@@ -6,20 +6,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { setWeather } from "../../reducers/weatherReducer";
 import weatherService from "../../services/weather";
 import { useQuery } from "react-query";
+import WeatherMetrics from "./WeatherMetrics";
 
 const Home = () => {
   const [city, setCity] = useState("");
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weather);
-
   const { isLoading } = useQuery(
     ["weatherData", city],
     () => weatherService.getCity(city),
     {
       enabled: !!city,
       onSuccess: (data) => {
-        const convertedData = splitWeatherByDate(data.list);
-        dispatch(setWeather(convertedData));
+        dispatch(setWeather(data));
       },
     }
   );
@@ -36,7 +35,13 @@ const Home = () => {
         <SearchInput onSubmit={handleSearch} />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3">
-        {weatherData && <Forecast splitedWeatherData={weatherData} />}
+        {weatherData && (
+          <Forecast splitedWeatherData={splitWeatherByDate(weatherData)} />
+        )}
+        <div>
+          <h3>Other cities</h3>
+        </div>
+        <WeatherMetrics cityData={weatherData.city} />
       </div>
     </div>
   );

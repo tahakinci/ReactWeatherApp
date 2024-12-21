@@ -17,6 +17,12 @@ export const getWeatherData = (weatherData: Record<string, List[]>) => {
   };
 };
 
+export const getWeatherDataByHour = (data: List) => {
+  return (dispatch: Dispatch) => {
+    dispatch(setWeather(data));
+  };
+};
+
 export const { setWeather } = weatherSlice.actions;
 
 export default weatherSlice.reducer;

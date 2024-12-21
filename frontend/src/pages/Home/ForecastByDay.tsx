@@ -6,16 +6,18 @@ type Props = {
   weatherData: List[];
 };
 
-const ForecastByDay = ({ weatherData }: Props) => {
+const ForecastByDay = ({ weatherData, setSelectedWeatherData }: Props) => {
   return (
     <div>
-      {dateToDayName(weatherData[0].dt_txt)}
-      <img
-        style={{ width: "100px" }}
-        src={`/assets/${iconById(weatherData[0].weather[0].id)}.png`}
-        alt=""
-      />
-      {weatherData[0].main.temp}
+      <button onClick={() => setSelectedWeatherData(weatherData)}>
+        {dateToDayName(weatherData[0].dt_txt)}
+        <img
+          style={{ width: "100px" }}
+          src={`/assets/${iconById(weatherData[0].weather[0].id)}.png`}
+          alt=""
+        />
+        {weatherData[0].main.temp}
+      </button>
     </div>
   );
 };
