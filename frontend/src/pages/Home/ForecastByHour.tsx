@@ -1,16 +1,15 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import { List } from "../../types";
 import { iconById } from "../../constants";
 import dayjs from "dayjs";
 import { setSelectedHourWeatherData } from "../../reducers/selectedHourReducer";
+import { useAppDispatch } from "../../hooks";
 
 type Props = {
   data: List[];
 };
 
 const ForecastByHour = ({ data }: Props) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -24,7 +23,7 @@ const ForecastByHour = ({ data }: Props) => {
                 src={`/assets/${iconById(hour.weather[0].id)}.png`}
                 alt=""
               />
-              <p>{hour.main.temp}</p>
+              <p>{Math.round(hour.main.temp)}°</p>
             </div>
           </button>
         </div>

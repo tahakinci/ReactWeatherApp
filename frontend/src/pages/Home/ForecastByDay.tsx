@@ -1,9 +1,11 @@
+import { SetStateAction } from "react";
 import { iconById } from "../../constants";
 import { List } from "../../types";
 import { dateToDayName } from "../../utils/converters";
 
 type Props = {
   weatherData: List[];
+  setSelectedWeatherData: React.Dispatch<SetStateAction<List[] | undefined>>;
 };
 
 const ForecastByDay = ({ weatherData, setSelectedWeatherData }: Props) => {
@@ -16,7 +18,7 @@ const ForecastByDay = ({ weatherData, setSelectedWeatherData }: Props) => {
           src={`/assets/${iconById(weatherData[0].weather[0].id)}.png`}
           alt=""
         />
-        {weatherData[0].main.temp}
+        {Math.round(weatherData[0].main.temp)}°
       </button>
     </div>
   );

@@ -1,7 +1,7 @@
-import { DaysOfWeek, List } from "../types";
+import { DaysOfWeek, Forecast, List } from "../types";
 import dayjs from "dayjs";
 
-export const splitWeatherByDate = (data: List[]) => {
+export const splitWeatherByDate = (data: Forecast) => {
   if (!Object.keys(data).length) return {};
   return data.list.reduce((acc, cur) => {
     const date = cur.dt_txt.split(" ")[0];

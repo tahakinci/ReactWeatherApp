@@ -2,16 +2,16 @@ import { useState } from "react";
 import SearchInput from "../../components/SearchInput";
 import Forecast from "./Forecast";
 import { splitWeatherByDate } from "../../utils/converters";
-import { useDispatch, useSelector } from "react-redux";
 import { setWeather } from "../../reducers/weatherReducer";
 import weatherService from "../../services/weather";
 import { useQuery } from "react-query";
 import WeatherMetrics from "./WeatherMetrics";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 
 const Home = () => {
   const [city, setCity] = useState("");
-  const dispatch = useDispatch();
-  const weatherData = useSelector((state) => state.weather);
+  const dispatch = useAppDispatch();
+  const weatherData = useAppSelector((state) => state.weather);
   const { isLoading } = useQuery(
     ["weatherData", city],
     () => weatherService.getCity(city),
@@ -30,7 +30,7 @@ const Home = () => {
   if (isLoading) return "Loading...";
 
   return (
-    <div>
+    <div className="px-[15vw]">
       <div id="header">
         <SearchInput onSubmit={handleSearch} />
       </div>
