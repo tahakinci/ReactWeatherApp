@@ -5,8 +5,10 @@ import dayjs from "dayjs";
 import { useLayoutEffect, useRef, useState } from "react";
 import {
   getTheLightSource,
+  isNight,
   mapCurrentTimeAsDegree,
 } from "../../../utils/arcCalculations";
+import utc from "dayjs/plugin/utc";
 
 type Props = {
   data: City;
@@ -26,12 +28,20 @@ const Sunset = ({ data }: Props) => {
   const [nightZoneHeight, setNightZoneHeight] = useState(0);
   const dayZoneRef = useRef<HTMLDivElement>(null);
   const nightZoneRef = useRef<HTMLDivElement>(null);
-  const dayTime = (dayjs.unix(data.sunset - data.sunrise).hour() * 100) / 24;
-  const sunrise = dayjs.unix(data.sunrise);
-  const sunset = dayjs.unix(data.sunset);
+  const dayTime =
+    (dayjs
+      .unix(data.sunset - data.sunrise)
+      .utc()
+      .hour() *
+      100) /
+    24;
+  const sunrise = dayjs.unix(data.sunrise + data.timezone).utc();
+  const sunset = dayjs.unix(data.sunset + data.timezone).utc();
+
+  dayjs.extend(utc);
 
   const isDay = () => {
-    return dayjs().isAfter(sunrise) && dayjs().isBefore(sunset);
+    return !isNight(sunrise, sunset, data.timezone);
   };
 
   const lightSourceCoord = getTheLightSource(
