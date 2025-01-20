@@ -1,6 +1,6 @@
 import Card from "../../../components/Card";
 import { FiSunset } from "react-icons/fi";
-import { City } from "../../../types";
+import { City, List } from "../../../types";
 import dayjs from "dayjs";
 import { useLayoutEffect, useRef, useState } from "react";
 import {
@@ -11,7 +11,8 @@ import {
 import utc from "dayjs/plugin/utc";
 
 type Props = {
-  data: City;
+  data: List;
+  cityData: City;
 };
 
 // gün çizelgesinin altına akşam cizelgesinin üstüne kaç saat gün kaç saat gece olduğu yazılacak
@@ -23,29 +24,29 @@ type Props = {
 // gündüz oranı ile gündüz kuşağının width hesaplanır. Hesaplanan widthin yarısı height değerini verir
 // Büyük ihtimal gün batımından sonra rerender olmazsa güneş gözükmeye devam edecek ona bir bak!
 
-const Sunset = ({ data }: Props) => {
+const Sunset = ({ data, cityData }: Props) => {
   const [dayZoneHeight, setDayZoneHeight] = useState(0);
   const [nightZoneHeight, setNightZoneHeight] = useState(0);
   const dayZoneRef = useRef<HTMLDivElement>(null);
   const nightZoneRef = useRef<HTMLDivElement>(null);
   const dayTime =
     (dayjs
-      .unix(data.sunset - data.sunrise)
+      .unix(cityData.sunset - cityData.sunrise)
       .utc()
       .hour() *
       100) /
     24;
-  const sunrise = dayjs.unix(data.sunrise + data.timezone).utc();
-  const sunset = dayjs.unix(data.sunset + data.timezone).utc();
-
+  const sunrise = dayjs.unix(cityData.sunrise + cityData.timezone).utc();
+  const sunset = dayjs.unix(cityData.sunset + cityData.timezone).utc();
+  const now = dayjs.unix(data.dt).utc();
   dayjs.extend(utc);
 
   const isDay = () => {
-    return !isNight(sunrise, sunset, data.timezone);
+    return !isNight(sunrise, sunset, now);
   };
 
   const lightSourceCoord = getTheLightSource(
-    mapCurrentTimeAsDegree(sunrise, sunset, data.timezone),
+    mapCurrentTimeAsDegree(sunrise, sunset, now),
     isDay()
   );
 

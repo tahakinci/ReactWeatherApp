@@ -22,7 +22,7 @@ const WeatherMetrics = ({ cityData }: Props) => {
       <div className="col-span-full grid grid-cols-2 sm:grid-cols-3 gap-2">
         <WeatherMap />
         <FeelsLike data={data} />
-        <Sunset data={cityData} />
+        <Sunset data={data} cityData={cityData} />
         <Visibility data={data} />
         <Humidity data={data} />
         <Wind data={data} />

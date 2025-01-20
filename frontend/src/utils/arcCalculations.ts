@@ -57,24 +57,18 @@ export const getMoonCoordinates = (angle: number): PointCoordiante => {
 export const mapCurrentTimeAsDegree = (
   sunrise: dayjs.Dayjs,
   sunset: dayjs.Dayjs,
-  timezone: number
+  now: dayjs.Dayjs
 ) => {
-  const nowAsMinute =
-    dayjs().utc().hour() * 60 + dayjs().minute() + timezone / 60;
-  const sunriseAsMinute = sunrise.hour() * 60 + sunrise.minute();
-  const sunsetAsMinute = sunset.hour() * 60 + sunset.minute();
-  //   const isNight = nowAsMinute < sunriseAsMinute || nowAsMinute > sunsetAsMinute;
-
-  const diametre = isNight(sunrise, sunset, timezone)
-    ? Math.abs(1440 - (sunsetAsMinute - sunriseAsMinute))
-    : Math.abs(sunriseAsMinute - sunsetAsMinute);
+  const diametre = isNight(sunrise, sunset, now)
+    ? Math.abs(1440 - (asMinute(sunset) - asMinute(sunrise)))
+    : Math.abs(asMinute(sunrise) - asMinute(sunset));
 
   const radius = diametre / 2;
 
-  const centerPoint = isNight(sunrise, sunset, timezone)
-    ? (sunsetAsMinute + (sunsetAsMinute + diametre)) / 2
-    : (sunriseAsMinute + sunsetAsMinute) / 2;
-  const x = centerPoint - nowAsMinute;
+  const centerPoint = isNight(sunrise, sunset, now)
+    ? (asMinute(sunset) + (asMinute(sunset) + diametre)) / 2
+    : (asMinute(sunrise) + asMinute(sunset)) / 2;
+  const x = centerPoint - asMinute(now);
 
   const coordinateRadius = Math.acos(x / radius);
   const coordinateDegree = coordinateRadius * (180 / Math.PI);
@@ -90,10 +84,9 @@ export const getTheLightSource = (degree: number, isDay: boolean) => {
 export const isNight = (
   sunrise: dayjs.Dayjs,
   sunset: dayjs.Dayjs,
-  timezone: number
+  now: dayjs.Dayjs
 ) => {
-  const now = asMinute(dayjs().utc()) + timezone / 60;
-  return now < asMinute(sunrise) || now > asMinute(sunset);
+  return asMinute(now) < asMinute(sunrise) || asMinute(now) > asMinute(sunset);
 };
 
 export const asMinute = (time: dayjs.Dayjs) => {
