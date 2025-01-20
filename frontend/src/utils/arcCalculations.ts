@@ -77,20 +77,6 @@ export const mapCurrentTimeAsDegree = (
   const coordinateRadius = Math.acos(x / radius);
   const coordinateDegree = coordinateRadius * (180 / Math.PI);
 
-  console.log(
-    "x: ",
-    x,
-    "radius: ",
-    radius,
-    "degree: ",
-    coordinateDegree,
-    "centerPoint",
-    centerPoint,
-    "now: ",
-    asMinute(now),
-    now
-  );
-
   return coordinateDegree;
 };
 
