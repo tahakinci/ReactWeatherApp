@@ -68,10 +68,28 @@ export const mapCurrentTimeAsDegree = (
   const centerPoint = isNight(sunrise, sunset, now)
     ? (asMinute(sunset) + (asMinute(sunset) + diametre)) / 2
     : (asMinute(sunrise) + asMinute(sunset)) / 2;
-  const x = centerPoint - asMinute(now);
+  const isAfterMidnight = now.hour() >= 0 && now.hour() < sunrise.hour();
+  const x = isAfterMidnight
+    ? centerPoint -
+      (asMinute(sunset) + (asMinute(now) + (24 - sunset.hour()) * 60))
+    : centerPoint - asMinute(now);
 
   const coordinateRadius = Math.acos(x / radius);
   const coordinateDegree = coordinateRadius * (180 / Math.PI);
+
+  console.log(
+    "x: ",
+    x,
+    "radius: ",
+    radius,
+    "degree: ",
+    coordinateDegree,
+    "centerPoint",
+    centerPoint,
+    "now: ",
+    asMinute(now),
+    now
+  );
 
   return coordinateDegree;
 };
