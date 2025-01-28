@@ -33,3 +33,19 @@ const dayNumberToDayStr = (day: number): string => {
 
   return DaysOfWeek[day];
 };
+
+export const pressureToAltitude = (
+  pressure: number,
+  seaLevelPressure: number
+) => {
+  if (pressure <= 0 || seaLevelPressure <= 0) {
+    throw new Error("Pressure values must be greater than 0");
+  }
+
+  // Calculate altitude using the formula
+  const altitude = Math.round(
+    44330 * (1 - Math.pow(pressure / seaLevelPressure, 0.1903))
+  );
+
+  return altitude; // Altitude in meters
+};
