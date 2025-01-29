@@ -38,9 +38,6 @@ const Home = () => {
         {weatherData && (
           <Forecast splitedWeatherData={splitWeatherByDate(weatherData)} />
         )}
-        <div>
-          <h3>Other cities</h3>
-        </div>
         <WeatherMetrics cityData={weatherData.city} />
       </div>
     </div>
