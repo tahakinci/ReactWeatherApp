@@ -26,7 +26,6 @@ const ForecastHour = ({
 
   const handleSelection = () => {
     if (isSelected) {
-      console.log(data);
       dispatch(setSelectedHourWeatherData(data));
     }
     return;
