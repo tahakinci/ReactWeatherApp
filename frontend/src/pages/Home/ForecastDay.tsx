@@ -21,15 +21,16 @@ const ForecastDay = ({
     setSelectedDayIndex(index);
   };
   return (
-    <div className="col-span-2 p-2">
-      <button onClick={handleClick}>
-        <p>{dateToDayName(weatherData[0].dt_txt)}</p>
-        <div className="flex items-center">
+    <div className=" w-full border-b-4 p-2 border-green-300 hover:border-b-0 hover:border-t-4 hover:border-t-green-500">
+      <button className="w-full" onClick={handleClick}>
+        <p className="text-left pb-1">{dateToDayName(weatherData[0].dt_txt)}</p>
+        <div className="flex items-center justify-between">
           <img
             className="w-16"
             src={`/assets/${iconById(weatherData[0].weather[0].id)}.png`}
             alt=""
           />
+
           <div>
             <div>{Math.round(weatherData[0].main.temp_min)}°</div>
             <div>{Math.round(weatherData[0].main.temp_max)}°</div>

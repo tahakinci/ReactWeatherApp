@@ -4,7 +4,7 @@ export interface Forecast {
   city: City;
 }
 
-export interface List {
+export interface ListBase {
   dt: number;
   main: Main;
   weather: Weather[];
@@ -19,6 +19,16 @@ export interface List {
   };
   dt_txt: string;
 }
+
+export interface ListWithRain extends ListBase {
+  rain: Rain;
+}
+
+export interface ListWithSnow extends ListBase {
+  snow: Snow;
+}
+
+export type List = ListBase | ListWithRain | ListWithSnow;
 
 export interface City {
   id: number;
@@ -57,6 +67,14 @@ interface Wind {
   speed: number;
   deg: number;
   gust: number;
+}
+
+interface Rain {
+  "3h": number;
+}
+
+interface Snow {
+  "3h": number;
 }
 
 export enum DaysOfWeek {

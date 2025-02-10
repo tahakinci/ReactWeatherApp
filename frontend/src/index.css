@@ -9,4 +9,52 @@
   .v-cut {
     clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
   }
+
+  @media only screen and (min-width: 1100px) {
+    .custom-width {
+      width: calc(2% - 20px);
+    }
+  }
+
+  @media only screen and (max-width: 1100px) {
+    .custom-width {
+      width: calc(2.25% - 20px);
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    .custom-width {
+      width: calc(3.25% - 20px);
+    }
+  }
+
+  @media only screen and (max-width: 550px) {
+    .custom-width {
+      width: calc(6.25% - 20px);
+    }
+  }
+
+  @media only screen and (min-width: 1100px) {
+    .custom-selected-width {
+      width: calc(3.3333% - 20px);
+    }
+  }
+
+  @media only screen and (max-width: 1100px) {
+    .custom-selected-width {
+      width: calc(4.5% - 20px);
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    .custom-selected-width {
+      width: calc(7% - 20px);
+    }
+  }
+
+  @media only screen and (max-width: 550px) {
+    .custom-selected-width {
+      width: calc(12% - 20px);
+    }
+  }
 }

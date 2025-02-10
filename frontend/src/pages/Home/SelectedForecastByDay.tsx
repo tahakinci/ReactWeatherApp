@@ -16,22 +16,22 @@ const SelectedForecastByDay = ({
     setSelectedWeatherData(weatherData);
   }, []);
   return (
-    <div className="flex-1">
-      <div className="w-full p-2">
-        <p className="text-left">{dateToDayName(weatherData[0].dt_txt)}</p>
-        <div className="flex items-center justify-between ">
-          <div className="flex">
-            <img
-              className="w-16"
-              src={`/assets/${iconById(weatherData[0].weather[0].id)}.png`}
-              alt=""
-            />
-            <div>
-              <div>{Math.round(weatherData[0].main.temp_min)}°</div>
-              <div>{Math.round(weatherData[0].main.temp_max)}°</div>
-            </div>
+    <div className="w-full p-2 border-t-4 border-t-green-500 ">
+      <p className="text-left pb-1">{dateToDayName(weatherData[0].dt_txt)}</p>
+      <div className="flex items-stretch justify-between gap-2">
+        <div className="flex justify-between flex-grow ">
+          <img
+            className="w-16"
+            src={`/assets/${iconById(weatherData[0].weather[0].id)}.png`}
+            alt=""
+          />
+          <div>
+            <div>{Math.round(weatherData[0].main.temp_min)}°</div>
+            <div>{Math.round(weatherData[0].main.temp_max)}°</div>
           </div>
-          <div>{weatherData[0].weather[0].description}</div>
+        </div>
+        <div className="border-l-[1px] self-stretch flex-grow border-l-black">
+          <p className="ml-2 w-full">{weatherData[0].weather[0].description}</p>
         </div>
       </div>
     </div>
