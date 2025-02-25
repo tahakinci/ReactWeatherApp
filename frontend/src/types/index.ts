@@ -86,3 +86,18 @@ export enum DaysOfWeek {
   "Friday" = 5,
   "Saturday" = 6,
 }
+
+export interface User {
+  name: string;
+  surname: string;
+  username: string;
+  email: string;
+  password: string;
+}
+
+export type UserWithoutPassword = Omit<User, "password">;
+
+export interface Notification {
+  status: "error" | "success";
+  message: string;
+}
