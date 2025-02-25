@@ -3,6 +3,25 @@
 @tailwind utilities;
 
 @layer utilities {
+  .error {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  .success {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
   .mountain {
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   }
