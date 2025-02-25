@@ -1,13 +1,15 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
+  name: String,
+  surname: String,
   username: {
     type: String,
     unique: true,
     required: true,
     minLength: 3,
   },
-  name: String,
+  email: String,
   passwordHash: String,
   cities: [
     {
@@ -17,6 +19,7 @@ const userSchema = new mongoose.Schema({
       minTemp: Number,
       description: String,
       timezone: Number,
+      isLocation: Boolean,
     },
   ],
 });
