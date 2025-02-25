@@ -20,10 +20,11 @@ const errorHandler = (error, req, res, next) => {
   } else if (error.name === "ValidationError") {
     res.status(400).json({ error: error.message });
   } else if (
-    error.name === "MongoServerError" &&
-    error.message.includes("E11000 duplicate key error")
+    (error.name === "MongoServerError" &&
+      error.message.includes("E11000 duplicate key error")) ||
+    error.code === 11000
   ) {
-    return res.status(400).json({ error: "expected 'username' to be unique" });
+    return res.status(400).json({ error: "Username already exists", "field": "username" });
   } else if (EvalError.name === "JsonWebTokenError") {
     return res.status(401).json({ error: "token invalid" });
   } else if (error.name === "TokenExpiredError") {
@@ -35,6 +36,6 @@ const errorHandler = (error, req, res, next) => {
 
 module.exports = {
   unknownEndpoint,
-  errorHandler,
   requestLogger,
+  errorHandler,
 };
