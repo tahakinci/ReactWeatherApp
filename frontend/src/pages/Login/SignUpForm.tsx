@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import userService from "../../services/users";
 import Input from "../../components/Input";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 // Username uniq olmalı ( serverden gelecek)
 // Passwordler matchlenmeli
@@ -38,7 +38,6 @@ const SignUpForm = () => {
         setError(res.data.field ?? "", { message: res.data.error });
       }
     } catch (error) {
-      console.log("here");
       // setNotification({status: "error", message: error.message})
       // setTimeout(() => {
       //   setNotification(null)

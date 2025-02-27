@@ -1,6 +1,8 @@
 import loginService from "../../services/login";
 import Input from "../../components/Input";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useAppDispatch } from "../../hooks";
+import { setUserData } from "../../reducers/userReducer";
 
 type Inputs = {
   username: string;
@@ -8,6 +10,7 @@ type Inputs = {
 };
 
 const SingInForm = () => {
+  const dispatch = useAppDispatch();
   const {
     register,
     setError,
@@ -16,11 +19,10 @@ const SingInForm = () => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log("here");
-    console.log(data);
     try {
       const user = await loginService.login(data);
       window.localStorage.setItem("loggedWeatherAppUser", JSON.stringify(user));
+      dispatch(setUserData(user));
     } catch (error) {}
   };
 
