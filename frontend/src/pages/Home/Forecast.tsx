@@ -1,6 +1,6 @@
 import { List } from "../../types";
 import ForecastDay from "./ForecastDay";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import ForecastDayDetail from "./ForecastDayDetail";
 import SelectedForecastByDay from "./SelectedForecastByDay";
 import Carousel from "../../components/Carousel";
