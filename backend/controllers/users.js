@@ -40,4 +40,27 @@ usersRouter.post("/", async (req, res, next) => {
   }
 });
 
+usersRouter.put("/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+
+    const updatedUser = {
+      name: body.name,
+      surname: body.surname,
+      username: body.username,
+      email: body.email,
+      passwordHash: body.passwordHash,
+      cities: body.cities,
+    };
+
+    console.log("updated user: ", updatedUser);
+
+    await User.findByIdAndUpdate(id, updatedUser);
+    res.status(201).end();
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = usersRouter;
