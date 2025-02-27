@@ -9,11 +9,22 @@ const getAll = async () => {
   return res.data;
 };
 
-const getCity = async (city: string): Promise<Forecast> => {
-  const res = await axios.get<Forecast>(
-    `${baseUrl}?q=${city}&appid=${key}&units=metric`
-  );
+async function getCity(city: string): Promise<Forecast>;
+async function getCity(coords: [number, number]): Promise<Forecast>;
+
+// Single Implementation
+async function getCity(param: string | [number, number]): Promise<Forecast> {
+  let url: string;
+
+  if (typeof param === "string") {
+    url = `${baseUrl}?q=${param}&appid=${key}&units=metric`;
+  } else {
+    const [lat, lon] = param;
+    url = `${baseUrl}?lat=${lat}&lon=${lon}&appid=${key}&units=metric`;
+  }
+
+  const res = await axios.get<Forecast>(url);
   return res.data;
-};
+}
 
 export default { getAll, getCity };
