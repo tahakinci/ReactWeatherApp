@@ -1,4 +1,5 @@
 import axios from "axios";
+import { User } from "../types";
 
 const baseUrl = "http://localhost:3004/api/users";
 
@@ -22,8 +23,17 @@ const singIn = async (credentials) => {
   }
 };
 
+const updateCities = async (id: string, userObj: User) => {
+  try {
+    const res = await axios.put(`${baseUrl}/${id}`, userObj);
+    return res.data;
+  } catch (error) {
+    // TODO}
+  }
+};
+
 // const addCity = async (id, city) => {
 //   const user = `${baseUrl}/${id}`;
 // };
 
-export default { getAll, getUser, singIn };
+export default { getAll, getUser, singIn, updateCities };

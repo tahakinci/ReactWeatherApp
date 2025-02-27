@@ -87,12 +87,31 @@ export enum DaysOfWeek {
   "Saturday" = 6,
 }
 
+export interface UserCityData {
+  name: string;
+  mainTemp: number;
+  maxTemp: number;
+  minTemp: number;
+  description: string;
+  timezone: number;
+  isLocation: boolean;
+}
+
 export interface User {
   name: string;
   surname: string;
   username: string;
   email: string;
   password: string;
+}
+
+export interface LoggedInUser {
+  id: string;
+  name: string;
+  surname: string;
+  username: string;
+  email: string;
+  cities: UserCityData[];
 }
 
 export type UserWithoutPassword = Omit<User, "password">;
