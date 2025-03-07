@@ -45,19 +45,25 @@ usersRouter.put("/:id", async (req, res, next) => {
     const { id } = req.params;
     const body = req.body;
 
-    const updatedUser = {
-      name: body.name,
-      surname: body.surname,
-      username: body.username,
-      email: body.email,
-      passwordHash: body.passwordHash,
-      cities: body.cities,
-    };
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
 
-    console.log("updated user: ", updatedUser);
+    const cityNames = new Set(user.cities.map((c) => c.name.toLowerCase()));
+    const isCityExists = cityNames.has(body.name.toLowerCase());
 
-    await User.findByIdAndUpdate(id, updatedUser);
-    res.status(201).end();
+    if (isCityExists) {
+      return res.status(400).json({ error: `${body.name} is already saved` });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { $push: { cities: body } },
+      { new: true, runValidators: true }
+    );
+
+    res.status(200).json(updatedUser);
   } catch (error) {
     next(error);
   }
