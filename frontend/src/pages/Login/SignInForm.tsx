@@ -2,7 +2,7 @@ import loginService from "../../services/login";
 import Input from "../../components/Input";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppDispatch } from "../../hooks";
-import { setUserData } from "../../reducers/userReducer";
+import { setUser, setUserData } from "../../reducers/userReducer";
 
 type Inputs = {
   username: string;
@@ -22,7 +22,8 @@ const SingInForm = () => {
     try {
       const user = await loginService.login(data);
       window.localStorage.setItem("loggedWeatherAppUser", JSON.stringify(user));
-      dispatch(setUserData(user));
+      window.localStorage.setItem("weatherAppSelectedNavItemIndex", "0");
+      dispatch(setUser(user));
     } catch (error) {}
   };
 

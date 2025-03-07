@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import SearchInput from "../../components/SearchInput";
 import Forecast from "./Forecast";
 import { splitWeatherByDate } from "../../utils/converters";
 import { setWeather } from "../../reducers/weatherReducer";
@@ -8,28 +7,37 @@ import usersService from "../../services/users";
 import { useQuery } from "react-query";
 import WeatherMetrics from "./WeatherMetrics";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { LoggedInUser, UserCityData } from "../../types";
+import { UserCityData } from "../../types";
+import Navbar from "../../components/Navbar";
+import { useParams } from "react-router-dom";
+import NavbarItem from "../../components/NavbarItem";
+import { CiSettings } from "react-icons/ci";
+import NavbarSubItem from "../../components/NavbarSubItem";
+import { MdFormatListBulleted } from "react-icons/md";
 
-type Props = {
-  data: LoggedInUser | null;
-};
-
-const Home = ({ data }: Props) => {
-  const [city, setCity] = useState("");
-  const [isLocationAccessGranted, setIsLocationAccessGranted] = useState(true);
-  const [selectedCity, setSelectedCity] = useState(data?.cities[0]);
+const Home = () => {
+  const { cityName } = useParams();
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.user);
   const weatherData = useAppSelector((state) => state.weather);
+  const [selectedCity, setSelectedCity] = useState<string | undefined>(
+    cityName
+  );
+  const user = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    if (cityName) {
+      setSelectedCity(cityName);
+    }
+  }, [cityName]);
 
   const { isLoading } = useQuery(
-    ["weatherData", city],
-    () => weatherService.getCity(city),
+    ["weatherData", selectedCity],
+    () => weatherService.getCity(selectedCity),
     {
-      enabled: !!city,
-      onSuccess: (data) => {
-        dispatch(setWeather(data));
-      },
+      enabled: !!selectedCity,
+      onSuccess: (data) => dispatch(setWeather(data)),
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
     }
   );
 
@@ -37,12 +45,11 @@ const Home = ({ data }: Props) => {
 
   async function success(position) {
     try {
-      setIsLocationAccessGranted(true);
       const res = await weatherService.getCity([
         position.coords.latitude,
         position.coords.longitude,
       ]);
-      const citiesArr = data?.cities.filter(
+      const citiesArr = user.data?.cities.filter(
         (city) => city.isLocation === false
       );
       const locationCityData: UserCityData = {
@@ -54,15 +61,15 @@ const Home = ({ data }: Props) => {
         timezone: res.city.timezone,
         isLocation: true,
       };
-      const updatedCity = await usersService.updateCities(data.id, {
-        ...data,
-        cities: locationCityData,
-      });
+      const updatedCity = await usersService.updateCities(
+        data.id,
+        locationCityData
+      );
     } catch (error) {}
   }
 
   function error() {
-    setIsLocationAccessGranted(false);
+    console.log(error);
   }
 
   const options = {
@@ -72,27 +79,33 @@ const Home = ({ data }: Props) => {
   };
 
   useEffect(() => {
-    const watchID = navigator.geolocation.watchPosition(
-      success,
-      error,
-      options
-    );
-  }, [isLocationAccessGranted]);
+    navigator.geolocation.getCurrentPosition(success, error, options);
+  }, []);
 
   //#endregion
-
-  const handleSearch = (search: string) => {
-    setCity(search);
-  };
 
   if (isLoading) return "Loading...";
 
   return (
-    <div className="px-[15vw]">
-      <div id="header">
-        <SearchInput onSubmit={handleSearch} />
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-3">
+    <div className="flex sm:flex-row  flex-col-reverse h-screen overflow-hidden bg-yellow-300">
+      <Navbar selectedCity={selectedCity}>
+        <NavbarItem
+          icon={<MdFormatListBulleted size={20} />}
+          text="Cities"
+          className="overflow-y-auto"
+        >
+          {user.cities.map((city, index) => {
+            return (
+              <li key={city.name} className="py-1 text-sm text-gray-500">
+                <NavbarSubItem data={city} index={index} />
+              </li>
+            );
+          })}
+        </NavbarItem>
+        <hr className="my-3" />
+        <NavbarItem icon={<CiSettings size={20} />} text="Settings" />
+      </Navbar>
+      <div className="mx-10 grid grid-cols-1 sm:grid-cols-3 overflow-y-auto bg-blue-300">
         {weatherData && (
           <Forecast splitedWeatherData={splitWeatherByDate(weatherData)} />
         )}
