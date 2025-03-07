@@ -1,8 +1,7 @@
-import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const loggedUser = window.localStorage.getItem("loggedWeatherAppUser");
-const initialState = JSON.parse(loggedUser) ?? null;
-// const initialState =  null;
+const initialState = loggedUser ? JSON.parse(loggedUser) : null;
 
 const userSlice = createSlice({
   name: "user",
@@ -11,15 +10,14 @@ const userSlice = createSlice({
     setUser(_state, action) {
       return action.payload;
     },
+    updateUser(state, action) {
+      return { ...state, ...action.payload };
+    },
+    logout() {
+      return null;
+    },
   },
 });
-
-export const setUserData = (user) => {
-  return async (dispatch: Dispatch) => {
-    dispatch(setUser(user));
-  };
-};
-
-export const { setUser } = userSlice.actions;
+export const { setUser, updateUser, logout } = userSlice.actions;
 
 export default userSlice.reducer;

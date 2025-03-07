@@ -11,7 +11,7 @@ import Modal from "../../components/Modal";
 // Login yapanlara token verilecek ve işlemlerde bu token göz önüne alınacak. Guestlerde token yer almayacak
 
 const Login = () => {
-  const [isSignIn, setIsSignIn] = useState(false);
+  const [isSignIn, setIsSignIn] = useState(true);
   return (
     <div className="w-full h-full">
       <div>

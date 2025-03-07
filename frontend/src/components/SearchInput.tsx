@@ -1,8 +1,9 @@
 type Props = {
   onSubmit: (data: string) => void;
+  className?: string;
 };
 
-const SearchInput = ({ onSubmit }: Props) => {
+const SearchInput = ({ onSubmit, className }: Props) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget as HTMLFormElement);
@@ -11,10 +12,12 @@ const SearchInput = ({ onSubmit }: Props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <button type="submit">ara</button>
-        <input name="searchInput" />
+    <div className={className}>
+      <form onSubmit={handleSubmit} className="flex">
+        <button className="p-2" type="submit">
+          ara
+        </button>
+        <input className="flex-grow p-2" name="searchInput" />
       </form>
     </div>
   );

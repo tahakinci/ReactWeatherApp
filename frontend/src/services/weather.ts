@@ -12,7 +12,6 @@ const getAll = async () => {
 async function getCity(city: string): Promise<Forecast>;
 async function getCity(coords: [number, number]): Promise<Forecast>;
 
-// Single Implementation
 async function getCity(param: string | [number, number]): Promise<Forecast> {
   let url: string;
 

@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../pages/Home";
-import Login from "../pages/Login";
 import Map from "../pages/Map";
 import App from "../App";
+import Cities from "../pages/Cities";
+import Settings from "../pages/Settings";
 
 export const router = createBrowserRouter([
   {
@@ -12,5 +12,17 @@ export const router = createBrowserRouter([
   {
     path: "/map",
     Component: Map,
+  },
+  {
+    path: "/city/:cityName",
+    Component: App,
+  },
+  {
+    path: "/cities",
+    Component: Cities,
+  },
+  {
+    path: "/settings",
+    Component: Settings,
   },
 ]);
