@@ -1,12 +1,10 @@
 import SearchInput from "../../components/SearchInput";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { setWeather } from "../../reducers/weatherReducer";
 import usersService from "../../services/users";
 import weatherService from "../../services/weather";
 import City from "./City";
 import { useEffect, useState } from "react";
 import { Forecast } from "../../types";
-import { useQuery } from "react-query";
 import { updateUser } from "../../reducers/userReducer";
 import { IoAdd } from "react-icons/io5";
 
@@ -52,7 +50,7 @@ const Cities = () => {
     };
 
     try {
-      await usersService.updateCities(user.id, cityObj);
+      await usersService.addCity(user.id, cityObj);
       dispatch(updateUser({ ...user, cities: [...user.cities, cityObj] }));
       window.localStorage.setItem(
         "loggedWeatherAppUser",
@@ -60,6 +58,25 @@ const Cities = () => {
       );
     } catch (error) {
       console.error("Error adding city:", error);
+    }
+  };
+
+  const handleDeleteCity = async (id: string) => {
+    try {
+      const cities = user.cities.filter((c) => c._id !== id);
+      const updatedUser = await usersService.updateCities(user.id, cities);
+      dispatch(
+        updateUser({
+          ...user,
+          cities: cities,
+        })
+      );
+      window.localStorage.setItem(
+        "loggedWeatherAppUser",
+        JSON.stringify({ ...user, cities: updatedUser.cities })
+      );
+    } catch (error) {
+      // TODO
     }
   };
 
@@ -96,7 +113,12 @@ const Cities = () => {
       )}
       {}
       {user.cities.map((city, index) => (
-        <City key={city.name} city={city} index={index} />
+        <City
+          key={city.name}
+          city={city}
+          index={index}
+          handleDeleteCity={handleDeleteCity}
+        />
       ))}
     </div>
   );

@@ -40,10 +40,10 @@ usersRouter.post("/", async (req, res, next) => {
   }
 });
 
-usersRouter.put("/:id", async (req, res, next) => {
+usersRouter.patch("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const body = req.body;
+    const city = req.body;
 
     const user = await User.findById(id);
     if (!user) {
@@ -51,15 +51,35 @@ usersRouter.put("/:id", async (req, res, next) => {
     }
 
     const cityNames = new Set(user.cities.map((c) => c.name.toLowerCase()));
-    const isCityExists = cityNames.has(body.name.toLowerCase());
-
-    if (isCityExists) {
-      return res.status(400).json({ error: `${body.name} is already saved` });
+    if (cityNames.has(city.name.toLowerCase())) {
+      return res.status(400).json({ error: `${city.name} is already saved` });
     }
 
     const updatedUser = await User.findByIdAndUpdate(
       id,
-      { $push: { cities: body } },
+      { $push: { cities: city } },
+      { new: true, runValidators: true }
+    );
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    next(error);
+  }
+});
+
+usersRouter.put("/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { cities } = req.body;
+
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { $set: { cities: cities } },
       { new: true, runValidators: true }
     );
 
