@@ -23,7 +23,9 @@ const ForecastDay = ({
   return (
     <div className=" w-full border-b-4 p-2 border-green-300 hover:border-b-0 hover:border-t-4 hover:border-t-green-500">
       <button className="w-full" onClick={handleClick}>
-        <p className="text-left pb-1">{dateToDayName(weatherData[0].dt_txt)}</p>
+        <h2 className="text-left pb-1">
+          {dateToDayName(weatherData[0].dt_txt)}
+        </h2>
         <div className="flex items-center justify-between">
           <img
             className="w-16"

@@ -47,7 +47,11 @@ const ForecastHour = ({
     handleSelection();
   }, [isSelected]);
   return (
-    <div className={`${isSelected ? "bg-red-300" : ""} p-2`}>
+    <div
+      className={`${
+        isSelected ? "bg-gray-400" : "hover:bg-gray-500 hover:scale-125"
+      } p-2`}
+    >
       <button
         onClick={() => setSelectedDataIndex(index)}
         className="w-full h-full"

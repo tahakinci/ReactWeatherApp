@@ -19,7 +19,7 @@ const WeatherMetrics = ({ cityData }: Props) => {
 
   if (Object.keys(data).length) {
     return (
-      <div className="col-span-full grid grid-cols-2 sm:grid-cols-3 gap-2">
+      <div className="col-span-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
         <WeatherMap />
         <FeelsLike data={data} />
         <Sunset data={data} cityData={cityData} />

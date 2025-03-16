@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { LuChevronFirst, LuChevronLast } from "react-icons/lu";
 import { NavbarContext } from "../context/navbarContext";
-import { logout, setUser, updateUser } from "../reducers/userReducer";
+import { logout, updateUser } from "../reducers/userReducer";
 import NavbarSearch from "./NavbarSearch";
 
 type Props = {
@@ -27,6 +27,7 @@ const Navbar = ({ children, selectedCity }: Props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!selectedCity) return;
     if (selectedCity.toLocaleLowerCase() !== searchedCity.toLowerCase()) {
       setSearchedCityData(null);
       setSearchedCity("");
@@ -75,9 +76,8 @@ const Navbar = ({ children, selectedCity }: Props) => {
     };
 
     try {
-      await usersService.updateCities(user.id, cityObj);
+      await usersService.addCity(user.id, cityObj);
       dispatch(updateUser({ ...user, cities: [...user.cities, cityObj] }));
-      console.log(user);
       window.localStorage.setItem(
         "loggedWeatherAppUser",
         JSON.stringify({ ...user, cities: [...user.cities, cityObj] })
@@ -99,15 +99,15 @@ const Navbar = ({ children, selectedCity }: Props) => {
 
   return (
     <aside className="sm:h-full h-10">
-      <nav className="sm:h-full h-10 flex flex-col bg-white border-r shadow-sm">
+      <nav className="sm:h-full h-10 flex flex-col bg-slate-800 border-r border-gray-700 shadow-sm">
         <div className="p-4 pb-2 justify-between items-center sm:flex hidden">
           <SearchInput
-            className={`${expanded ? "block" : "hidden"}`}
+            className={`${expanded ? "block" : "hidden"} mr-2`}
             onSubmit={handleSearch}
           />
           <button
             onClick={() => setExpanded((curr) => !curr)}
-            className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100 sm:block hidden"
+            className="p-1.5 rounded-lg bg-gray-700 hover:bg-gray-600 text-indigo-200 hover:text-indigo-100 sm:block hidden"
           >
             {expanded ? <LuChevronFirst /> : <LuChevronLast />}
           </button>
@@ -127,18 +127,25 @@ const Navbar = ({ children, selectedCity }: Props) => {
             {children}
           </ul>
         </NavbarContext.Provider>
-        <div className="border-t p-3 sm:flex hidden">
+        <div className="border-t border-gray-700 p-3 sm:flex hidden">
           <img src="" alt="" className="w-10 h-10 rounded-md" />
           <div
-            className={`overflow-hidden transition-all flex justify-between items-center  ${
-              expanded ? "w-52 ml-3 " : "w-0"
-            }`}
+            className={`overflow-hidden transition-all flex  justify-between items-center  ${
+              expanded ? "w-full ml-3 " : "w-0"
+            } `}
           >
             <div className="leading-4 ">
-              <h4 className="font-semibold">John Doe</h4>
-              <span className="text-xs text-gray-600">johndoe@gmail.com</span>
+              <h2 className="font-semibold text-gray-200">John Doe</h2>
+              <span className="subtext text-xs text-gray-400">
+                johndoe@gmail.com
+              </span>
             </div>
-            <button onClick={handleLogout}>Logout</button>
+            <button
+              className="bg-gray-600 p-2 rounded-md text-rose-600"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           </div>
         </div>
       </nav>

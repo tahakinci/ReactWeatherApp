@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LoggedInUser, UserCityData } from "../types";
+import { City, LoggedInUser, UserCityData } from "../types";
 
 const baseUrl = "http://localhost:3004/api/users";
 
@@ -23,17 +23,22 @@ const singIn = async (credentials) => {
   }
 };
 
-const updateCities = async (id: string, userObj: UserCityData) => {
+const addCity = async (id: string, city: City) => {
   try {
-    const res = await axios.put(`${baseUrl}/${id}`, userObj);
+    const res = await axios.patch(`${baseUrl}/${id}`, city);
     return res.data;
   } catch (error) {
-    // TODO}
+    console.error(error);
   }
 };
 
-// const addCity = async (id, city) => {
-//   const user = `${baseUrl}/${id}`;
-// };
+const updateCities = async (id: string, cities: City[]) => {
+  try {
+    const res = await axios.put(`${baseUrl}/${id}`, { cities });
+    return res.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-export default { getAll, getUser, singIn, updateCities };
+export default { getAll, getUser, singIn, addCity, updateCities };

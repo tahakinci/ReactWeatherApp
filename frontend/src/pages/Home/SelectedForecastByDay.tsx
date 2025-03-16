@@ -17,7 +17,7 @@ const SelectedForecastByDay = ({
   }, []);
   return (
     <div className="w-full p-2 border-t-4 border-t-green-500 ">
-      <p className="text-left pb-1">{dateToDayName(weatherData[0].dt_txt)}</p>
+      <h2 className="text-left pb-1">{dateToDayName(weatherData[0].dt_txt)}</h2>
       <div className="flex items-stretch justify-between gap-2">
         <div className="flex justify-between flex-grow ">
           <img

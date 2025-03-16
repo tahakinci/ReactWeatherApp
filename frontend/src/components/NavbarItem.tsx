@@ -27,20 +27,20 @@ const NavbarItem = ({
         className={`flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors ${
           active
             ? "bg-gradient-to-tr from-indigo-200 to-indigo-100"
-            : "hover:bg-indigo-50 text-gray-600"
+            : "hover:bg-indigo-200 text-gray-200 hover:text-gray-500"
         }`}
       >
         {icon}
-        <span
-          className={`overflow-hidden transition-all sm:block hidden  ${
-            expanded ? "sm:w-32 w-0" : "w-0"
+        <h2
+          className={`overflow-hidden transition-all sm:block hidden ml-2  ${
+            expanded ? "w-52" : "w-0"
           }`}
         >
           {text}
-        </span>
+        </h2>
       </Link>
       {children && expanded && (
-        <ul className="ml-4 border-l border-gray-300 sm:block hidden pl-3">
+        <ul className="ml-4 border-l border-gray-700 sm:block hidden">
           {children}
         </ul>
       )}

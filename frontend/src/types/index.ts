@@ -95,6 +95,7 @@ export interface UserCityData {
   description: string;
   timezone: number;
   isLocation: boolean;
+  _id: string;
 }
 
 export interface User {

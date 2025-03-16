@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Modal from "./components/Modal";
 import Login from "./pages/Login";
 import { useAppSelector } from "./hooks";
+import Rain from "./components/WeatherBackgroudAnşmations/Rain";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,14 +18,15 @@ const App = () => {
   }, [user]);
 
   return (
-    <>
+    <div className="relative">
+      <Rain />
       {isOpen && (
         <Modal onClose={() => setIsOpen(false)}>
           <Login />
         </Modal>
       )}
       {user && <Home />}
-    </>
+    </div>
   );
 };
 
