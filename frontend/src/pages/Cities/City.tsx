@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { UserCityData } from "../../types";
 import { MdOutlineDeleteForever } from "react-icons/md";
+import { clockGenerator } from "../../utils/clockGenerator";
 
 type Props = {
   city: UserCityData;
@@ -17,7 +18,8 @@ const City = ({ city, index, handleDeleteCity }: Props) => {
   return (
     <div>
       <div className="p-4 border-2 border-black mb-2 rounded-md">
-        <div className="text-right">
+        <div className="flex justify-between items-center">
+          <p>{clockGenerator(city.timezone)}</p>
           <button
             onClick={() => handleDeleteCity(city._id)}
             className="

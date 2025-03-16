@@ -3,6 +3,7 @@ import { UserCityData } from "../types";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineDeleteForever } from "react-icons/md";
+import { clockGenerator } from "../utils/clockGenerator";
 
 type Props = {
   data: UserCityData;
@@ -59,6 +60,7 @@ const NavbarSubItem = ({ data, index, handleDeleteCity }: Props) => {
         <div className={`${isSelected ? "text-gray-100" : "text-gray-100"} `}>
           {data.isLocation ? <p>My Location</p> : null}
           <p>{data.name}</p>
+          <p>{clockGenerator(data.timezone)}</p>
         </div>
         <div
           className={`overflow-hidden transition-all ${
