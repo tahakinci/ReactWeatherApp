@@ -13,7 +13,7 @@ const Precipitation = ({ precipitation = 0, type }: Props) => {
     >
       {type === "snow" && <FaSnowflake />}
       {type === "rain" && <FaCloudRain />}
-      {precipitation * 100}%
+      <p className="text-sky-400">{((precipitation * 100) / 3).toFixed(0)}%</p>
     </div>
   );
 };
