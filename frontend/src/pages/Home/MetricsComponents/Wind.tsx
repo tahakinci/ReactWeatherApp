@@ -18,17 +18,17 @@ const Wind = ({ data }: Props) => {
     >
       <div className="flex sm:flex-col-reverse flex-row sm:h-fit h-full">
         <div className="sm:w-full w-1/2 flex text-xs sm:flex-row flex-col justify-around p-2 h-full">
-          <div className="flex text-center sm:flex-col flex-row items-center justify-between  p-2 border-gray-400 sm:border-t-2 border-none">
+          <div className="flex text-center sm:flex-col flex-row items-center justify-between  p-2 border-gray-400 border-b-2 sm:border-none ">
             <p className="sm:hidden block">Wind</p>
             <FiWind size={15} className="sm:block hidden" />
             <p className="text-gray-300 font-light ">{data.wind.speed} km/h</p>
           </div>
-          <div className="flex text-center sm:flex-col items-center flex-row p-2 justify-between border-gray-400 sm:border-t-2 border-none">
+          <div className="flex text-center sm:flex-col items-center flex-row p-2 justify-between border-gray-400 border-b-2 sm:border-none">
             <p className="sm:hidden block">Gust</p>
             <WiCloudyGusts className="sm:block hidden" size={15} />
             <p className="text-gray-300 font-light ">{data.wind.gust} km/h</p>
           </div>
-          <div className="flex text-center sm:flex-col flex-row items-center p-2 justify-between border-gray-400 sm:border-t-2 border-none">
+          <div className="flex text-center sm:flex-col flex-row items-center p-2 justify-between border-gray-400 border-b-2 sm:border-none">
             <p className="sm:hidden block">Direction</p>
             <MdSpeed className="sm:block hidden" size={15} />
             <p className="text-gray-300 flex-1 text-nowrap font-light ">
