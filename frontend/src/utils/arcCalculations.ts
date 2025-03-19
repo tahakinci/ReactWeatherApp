@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import utc from "dayjs/plugin/utc";
 
 type PointCoordiante = {
@@ -95,4 +95,39 @@ export const isNight = (
 
 export const asMinute = (time: dayjs.Dayjs) => {
   return time.hour() * 60 + time.minute();
+};
+
+export const convertMinutesToTime = (
+  minutes: number,
+  isClockFormat = false,
+  seperator: ":" | "." | "," = ":"
+) => {
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+  if (!isClockFormat) return `${hours} hours ${remainingMinutes} minutes`;
+  return `${hours}${seperator}${
+    remainingMinutes < 10 ? "0" : ""
+  }${remainingMinutes}`;
+};
+
+export const timeUntilEvent = (sunset: Dayjs, sunrise: Dayjs, now: Dayjs) => {
+  const sunsetMinutes = asMinute(sunset);
+  const sunriseMinutes = asMinute(sunrise);
+  const nowMinutes = asMinute(now);
+
+  const totalMinutesInDay = 24 * 60;
+
+  if (nowMinutes >= sunriseMinutes && nowMinutes < sunsetMinutes) {
+    return `${convertMinutesToTime(sunsetMinutes - nowMinutes)} until sunset `;
+  } else {
+    if (nowMinutes > sunsetMinutes) {
+      return `${convertMinutesToTime(
+        totalMinutesInDay - nowMinutes + sunriseMinutes
+      )} until sunrise`;
+    } else {
+      return `${convertMinutesToTime(
+        sunriseMinutes - nowMinutes
+      )} until sunrise`;
+    }
+  }
 };
