@@ -62,7 +62,7 @@ const Forecast = ({ splitedWeatherData }: Props) => {
         styles="opacity-[0.8] mb-3"
         icon={<HiDocumentReport />}
       >
-        <div className="flex flex-col sm:flex-row sm:min-h-56 p-2 overflow-y-auto">
+        <div className="flex flex-col sm:flex-row sm:min-h-56 p-2 ">
           <ForecastDayDetail data={selectedWeatherData ?? []} />
         </div>
       </Card>

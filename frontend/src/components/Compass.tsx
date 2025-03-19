@@ -1,8 +1,12 @@
 import { useRef } from "react";
 
 type Props = {
+  outerDiameter: number;
+  innerDiameter: number;
+  precision: number;
   degree: number;
   speed: number;
+  mainText: string[];
   mainTextFontSize: number;
 };
 
@@ -14,7 +18,7 @@ const Compass = ({
   speed,
   mainText = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"],
   mainTextFontSize = 14,
-}) => {
+}: Props) => {
   const M = outerDiameter;
 
   const ticks = [];
